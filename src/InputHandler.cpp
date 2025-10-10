@@ -24,6 +24,7 @@ void GameInput::update(float deltaTime)
     if (m_inputData.m_space)
     {
         m_pPlayer->attack();
+        m_inputData.m_space = false;
     }
 }
 

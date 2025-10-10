@@ -31,6 +31,7 @@ public:
     void setIsDead(bool isDead) { m_isDead = isDead; }
 
     Weapon* getWeapon() { return m_pWeapon.get(); }
+    eDirection getDirection() const { return m_direction; }
 
 private:
     bool    m_isDead = false;

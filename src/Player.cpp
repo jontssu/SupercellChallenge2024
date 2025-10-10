@@ -10,7 +10,7 @@
 Player::Player(Game* pGame) :
     Rectangle(sf::Vector2f(PlayerWidth, PlayerHeight)),
     m_pGame(pGame),
-    m_pWeapon(std::make_unique<Weapon>())
+    m_pWeapon(std::make_unique<Weapon>(pGame))
 {
     setOrigin(sf::Vector2f(0.0f, 0.0f));
 }
@@ -22,7 +22,7 @@ bool Player::initialise()
     setIsDead(false);
     setPosition(ScreenWidth / 2, ScreenHeight / 2);
     m_sprite.setPosition(getPosition());
-    // m_pWeapon->initialise(m_pGame);
+    //Clear weapon's bullets
     return true;
 }
 

@@ -30,6 +30,14 @@ void Vampire::update(float deltaTime)
         return;
     }
 
+    // Check collision with bullets
+    for (const auto& bullet : pPlayer->getWeapon()->getBullets()) {
+        if (collidesWith(bullet.get())) {
+            setIsKilled(true);
+            break;
+        }
+    }
+
     if (collidesWith(pPlayer))
         pPlayer->setIsDead(true);
 

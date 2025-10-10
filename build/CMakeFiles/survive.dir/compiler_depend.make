@@ -7206,6 +7206,7 @@ CMakeFiles/survive.dir/src/Weapon.cpp.o: /Users/jon/survive/src/Weapon.cpp \
   /Users/jon/survive/src/Bullet.h \
   /Users/jon/survive/src/Constants.h \
   /Users/jon/survive/src/Game.h \
+  /Users/jon/survive/src/Player.h \
   /Users/jon/survive/src/Rectangle.h \
   /Users/jon/survive/src/Weapon.h
 

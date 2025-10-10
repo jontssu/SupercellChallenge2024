@@ -7,7 +7,7 @@
 class Weapon : public Rectangle
 {
 public:
-    Weapon();
+    Weapon(Game* pGame);
     virtual ~Weapon() {}
 
     bool initialise(Game* pGame);
@@ -16,10 +16,17 @@ public:
     bool isActive() { return m_isActive; }
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    void bulletSpawner(float deltaTime);
+
+    const std::vector<std::unique_ptr<Bullet>>& getBullets() const { return m_pBullets; }
 
 private:
     bool m_isActive = false;
     float m_timer = 0.0f;
 
+    float m_bulletCooldown = 0.0f;
+    float m_nextBulletCooldown = 0.2f;
+
+    Game* m_pGame;
     std::vector<std::unique_ptr<Bullet>> m_pBullets;
 };
