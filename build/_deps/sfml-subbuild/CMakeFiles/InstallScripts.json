@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/jon/survive/build/_deps/sfml-subbuild/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
