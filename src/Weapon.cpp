@@ -11,7 +11,7 @@ Weapon::Weapon() : Rectangle(sf::Vector2f(0, 0))
 
 bool Weapon::initialise(Game* pGame) {
     m_sprite.setTexture(*pGame->getGunTexture());
-    m_sprite.setScale(0.001f, 0.001f);
+    m_sprite.setScale(0.1f, 0.1f);
 
     m_sprite.setPosition(getPosition());
     return (true);
