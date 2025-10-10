@@ -2,6 +2,7 @@
 
 #include "Rectangle.h"
 #include "Game.h"
+#include "Bullet.h"
 
 class Weapon : public Rectangle
 {
@@ -19,4 +20,6 @@ public:
 private:
     bool m_isActive = false;
     float m_timer = 0.0f;
+
+    std::vector<std::unique_ptr<Bullet>> m_pBullets;
 };

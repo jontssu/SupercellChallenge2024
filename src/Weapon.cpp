@@ -1,20 +1,11 @@
 #include "Weapon.h"
 #include "Constants.h"
-#include "Game.h"
 
 Weapon::Weapon() : Rectangle(sf::Vector2f(0, 0))
 {
     setPosition(sf::Vector2f(ScreenWidth * 0.5f, ScreenHeight * 0.5f));
     setOrigin(sf::Vector2f(0.0f, 0.0f));
     setColor(sf::Color::Blue);
-}
-
-bool Weapon::initialise(Game* pGame) {
-    m_sprite.setTexture(*pGame->getGunTexture());
-    m_sprite.setScale(0.1f, 0.1f);
-
-    m_sprite.setPosition(getPosition());
-    return (true);
 }
 
 void Weapon::setActive(bool isActive)

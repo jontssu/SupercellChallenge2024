@@ -810,5 +810,5 @@ CMakeFiles/survive.dir/src/Vampire.cpp.o: \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/Text.hpp \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/VertexBuffer.hpp \
   /Users/jon/survive/src/Constants.h /Users/jon/survive/src/Game.h \
-  /Users/jon/survive/src/Weapon.h /Users/jon/survive/src/Player.h \
-  /Users/jon/survive/src/MathUtils.h
+  /Users/jon/survive/src/Weapon.h /Users/jon/survive/src/Bullet.h \
+  /Users/jon/survive/src/Player.h /Users/jon/survive/src/MathUtils.h

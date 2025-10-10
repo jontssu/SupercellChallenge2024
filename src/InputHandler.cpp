@@ -53,6 +53,10 @@ void GameInput::onKeyPressed(sf::Keyboard::Key key)
         }
         m_inputData.m_spaceReleased = false;
     }
+    else if (key == sf::Keyboard::Escape)
+    {
+        exit(0);
+    }
 }
 
 void GameInput::onKeyReleased(sf::Keyboard::Key key)

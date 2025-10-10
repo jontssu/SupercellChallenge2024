@@ -22,7 +22,7 @@ bool Player::initialise()
     setIsDead(false);
     setPosition(ScreenWidth / 2, ScreenHeight / 2);
     m_sprite.setPosition(getPosition());
-    //m_pWeapon->initialise(m_pGame);
+    // m_pWeapon->initialise(m_pGame);
     return true;
 }
 

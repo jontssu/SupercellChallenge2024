@@ -809,4 +809,5 @@ CMakeFiles/survive.dir/src/Weapon.cpp.o: \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/Sprite.hpp \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/Text.hpp \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/VertexBuffer.hpp \
-  /Users/jon/survive/src/Game.h /Users/jon/survive/src/Constants.h
+  /Users/jon/survive/src/Game.h /Users/jon/survive/src/Constants.h \
+  /Users/jon/survive/src/Bullet.h

@@ -71,7 +71,7 @@ void Game::update(float deltaTime)
     {
         case State::WAITING:
         {
-            if (m_pClock->getElapsedTime().asSeconds() >= 3.f)
+            if (m_pClock->getElapsedTime().asSeconds() >= GameStartWaitingTime)
             {
                 m_state = State::ACTIVE;
                 m_pClock->restart();

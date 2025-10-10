@@ -813,5 +813,5 @@ CMakeFiles/survive.dir/src/Game.cpp.o: /Users/jon/survive/src/Game.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
   /Users/jon/survive/src/ResourceManager.h \
   /Users/jon/survive/src/InputHandler.h /Users/jon/survive/src/Weapon.h \
-  /Users/jon/survive/src/Rectangle.h /Users/jon/survive/src/Player.h \
-  /Users/jon/survive/src/Vampire.h
+  /Users/jon/survive/src/Rectangle.h /Users/jon/survive/src/Bullet.h \
+  /Users/jon/survive/src/Player.h /Users/jon/survive/src/Vampire.h
