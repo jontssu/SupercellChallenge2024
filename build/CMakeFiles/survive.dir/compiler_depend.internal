@@ -814,9 +814,11 @@ CMakeFiles/survive.dir/src/Base.cpp.o
  /Users/jon/survive/build/_deps/sfml-src/include/SFML/Window/WindowHandle.hpp
  /Users/jon/survive/build/_deps/sfml-src/include/SFML/Window/WindowStyle.hpp
  /Users/jon/survive/src/Base.h
+ /Users/jon/survive/src/Bullet.h
  /Users/jon/survive/src/Constants.h
  /Users/jon/survive/src/Game.h
  /Users/jon/survive/src/Rectangle.h
+ /Users/jon/survive/src/Weapon.h
 
 CMakeFiles/survive.dir/src/Bullet.cpp.o
  /Users/jon/survive/src/Bullet.cpp

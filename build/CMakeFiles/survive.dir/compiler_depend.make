@@ -813,9 +813,11 @@ CMakeFiles/survive.dir/src/Base.cpp.o: /Users/jon/survive/src/Base.cpp \
   _deps/sfml-src/include/SFML/Window/WindowHandle.hpp \
   _deps/sfml-src/include/SFML/Window/WindowStyle.hpp \
   /Users/jon/survive/src/Base.h \
+  /Users/jon/survive/src/Bullet.h \
   /Users/jon/survive/src/Constants.h \
   /Users/jon/survive/src/Game.h \
-  /Users/jon/survive/src/Rectangle.h
+  /Users/jon/survive/src/Rectangle.h \
+  /Users/jon/survive/src/Weapon.h
 
 CMakeFiles/survive.dir/src/Bullet.cpp.o: /Users/jon/survive/src/Bullet.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h \
@@ -8048,8 +8050,6 @@ CMakeFiles/survive.dir/src/Weapon.cpp.o: /Users/jon/survive/src/Weapon.cpp \
 
 /Users/jon/survive/src/Main.cpp:
 
-/Users/jon/survive/src/Weapon.h:
-
 /Users/jon/survive/src/Vampire.h:
 
 /Users/jon/survive/src/ResourceManager.h:
@@ -8060,13 +8060,15 @@ CMakeFiles/survive.dir/src/Weapon.cpp.o: /Users/jon/survive/src/Weapon.cpp \
 
 /Users/jon/survive/src/Game.cpp:
 
-/Users/jon/survive/src/Bullet.h:
+/Users/jon/survive/src/Weapon.h:
 
 /Users/jon/survive/src/Rectangle.h:
 
 /Users/jon/survive/src/Game.h:
 
 /Users/jon/survive/src/Constants.h:
+
+/Users/jon/survive/src/Bullet.h:
 
 /Users/jon/survive/src/Base.h:
 

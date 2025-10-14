@@ -33,7 +33,13 @@ public:
         DAMAGE,
         FIRE_RATE,
         PIERCING,
-        PLAYER_SPEED
+        PLAYER_SPEED,
+
+        UNLOCK_BASE,
+        BASE_BEALTH,
+        BASE_DAMAGE,
+        BASE_FIRE_RATE,
+        BASE_PIERCING
     };
     
     Game();
@@ -95,4 +101,11 @@ private:
     int m_upgradeFireRateCost = 50;
     int m_upgradePiercingCost = 100;
     int m_upgradePlayerSpeedCost = 50;
+
+    bool m_baseUnlocked = false;
+    int m_upgradeBaseUnlockCost = 500;
+    int m_upgradeBaseHealthCost = 50;
+    int m_upgradeBaseDamageCost = 50;
+    int m_upgradeBaseFireRateCost = 50;
+    int m_upgradeBasePiercingCost = 100;
 };

@@ -101,6 +101,7 @@ void Game::update(float deltaTime)
         {
             m_pGameInput->update(deltaTime);
             m_pPlayer->update(deltaTime);
+            m_pBase->update(deltaTime);
 
             vampireSpawner(deltaTime);
             for (auto& temp : m_pVampires)
@@ -404,6 +405,33 @@ void Game::onMousePressed(sf::Vector2i mousePos)
                     m_playerMoney -= m_upgradePlayerSpeedCost;
                     m_pPlayer->increaseSpeed(20.0f);
                     m_upgradePlayerSpeedCost += 50;
+                }
+                break;
+            case 5:
+                if (m_playerMoney >= m_upgradeBaseUnlockCost && !m_baseUnlocked)
+                {
+                    std::cout << "Unlocking Base" << std::endl;
+                    m_playerMoney -= m_upgradeBaseUnlockCost;
+                    m_pBase->unlockBase(true);
+                    m_baseUnlocked = true;
+                }
+                break;
+            case 6:
+                if (m_playerMoney >= m_upgradeBaseHealthCost && m_baseUnlocked)
+                {
+                    std::cout << "Upgrading Base Health" << std::endl;
+                    m_playerMoney -= m_upgradeBaseHealthCost;
+                    m_pBase->increaseMaxHealth(20);
+                    m_upgradeBaseHealthCost += 25;
+                }
+                break;
+            case 7:
+                if (m_playerMoney >= m_upgradeBaseDamageCost && m_baseUnlocked)
+                {
+                    std::cout << "Upgrading Base Damage" << std::endl;
+                    m_playerMoney -= m_upgradeBaseDamageCost;
+                    m_pBase->increaseDamage(50);
+                    m_upgradeBaseDamageCost += 25;
                 }
                 break;
             default:

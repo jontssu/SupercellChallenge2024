@@ -32,7 +32,7 @@ private:
     float m_timer = 0.0f;
 
     float m_bulletCooldown = 0.0f;
-    float m_nextBulletCooldown = StartBulletCooldown;
+    float m_nextBulletCooldown = WeaponFireRate;
     float m_bulletDamage = WeaponBulletDamage;
     
     float m_laserActiveTime = WeaponLaserActiveTime;
