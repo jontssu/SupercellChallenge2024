@@ -11,6 +11,7 @@
 #include "Rectangle.h"
 #include "Vampire.h"
 #include "Base.h"
+#include "Constants.h"
 
 Game::Game() :
     m_state(State::WAITING),
@@ -166,11 +167,11 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
     if (m_state == State::PAUSED)
     {
         // Shop background
-        sf::RectangleShape shopBg(sf::Vector2f(400, 300));
+        sf::RectangleShape shopBg(ShopBgSize);
         shopBg.setFillColor(sf::Color(30, 30, 30, 220));
         shopBg.setOutlineColor(sf::Color::Yellow);
         shopBg.setOutlineThickness(4);
-        shopBg.setPosition((ScreenWidth - 400) / 2, (ScreenHeight - 300) / 2);
+        shopBg.setPosition((ScreenWidth - ShopBgSize.x) / 2, (ScreenHeight - ShopBgSize.y) / 2);
         target.draw(shopBg);
 
         // Shop text
@@ -180,15 +181,18 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
         shopText.setFillColor(sf::Color::White);
         shopText.setCharacterSize(32);
         shopText.setStyle(sf::Text::Bold);
-        shopText.setPosition((ScreenWidth - 400) / 2 + 40, (ScreenHeight - 300) / 2 + 40);
+        shopText.setPosition((ScreenWidth - ShopBgSize.x) / 2 + 40, (ScreenHeight - ShopBgSize.y) / 2 + 40);
         target.draw(shopText);
 
         // Shop UI: 5 clickable icons
+        int numIcons = 5;
         float iconSize = 64.0f;
         float iconSpacing = 24.0f;
-        float startX = (ScreenWidth - 400) / 2 + 40;
-        float startY = (ScreenHeight - 300) / 2 + 120;
-        for (int i = 0; i < 5; ++i)
+        float totalWidth = iconSize * numIcons + iconSpacing * (numIcons - 1);
+        float shopBgX = (ScreenWidth - ShopBgSize.x) / 2;
+        float startX = shopBgX + (ShopBgSize.x - totalWidth) / 2;
+        float startY = (ScreenHeight - ShopBgSize.y) / 2 + 120;
+        for (int i = 0; i < numIcons; ++i)
         {
             sf::RectangleShape icon(sf::Vector2f(iconSize, iconSize));
             icon.setFillColor(sf::Color(80, 80, 200, 220));

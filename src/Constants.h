@@ -28,8 +28,9 @@ const float BaseHeight = 50.0f;
 const float BaseWidth = 50.0f;	
 const float BaseStartingHealth = 100.0f;
 
-const float GameStartWaitingTime = 1.0f;
+const sf::Vector2f ShopBgSize = sf::Vector2f(450.0f, 300.0f);
 
+const float GameStartWaitingTime = 1.0f;
 const bool PlayerImmunity = false;
 const bool BaseImmunity = false;
 const bool DisableWeapons = false;
