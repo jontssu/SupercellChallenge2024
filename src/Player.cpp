@@ -39,8 +39,6 @@ void Player::move(InputData inputData, float deltaTime)
     ySpeed += inputData.m_movingDown * m_playerSpeed;
     ySpeed *= deltaTime;
 
-    std::cout << "X Speed: " << xSpeed << " Y Speed: " << ySpeed << std::endl;
-    
     sf::Vector2f position = sf::Transformable::getPosition();
     if (position.x + xSpeed > ScreenWidth - PlayerWidth || position.x + xSpeed < 0)
         xSpeed = 0;

@@ -34,6 +34,7 @@ public:
     float getCurrentHealth() const { return m_currentHealth; }
 
     void increaseSpeed(float amount) { m_playerSpeed += amount; }
+    float getSpeed() const { return m_playerSpeed; }
 
     bool isDead() const { return m_isDead; }
     void setIsDead(bool isDead) { m_isDead = PlayerImmunity == true ? false : isDead; }
@@ -42,9 +43,9 @@ public:
     eDirection getDirection() const { return m_direction; }
 
 private:
-    float m_maxHealth = PlayerMaxHealth;
-    float m_currentHealth = m_maxHealth;
-    float m_playerSpeed = PlayerSpeed;
+    float   m_maxHealth = PlayerMaxHealth;
+    float   m_currentHealth = m_maxHealth;
+    float   m_playerSpeed = PlayerSpeed;
     bool    m_isDead = false;
 
     eDirection m_direction = LEFT;
