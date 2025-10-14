@@ -811,6 +811,8 @@ CMakeFiles/survive.dir/src/Game.cpp.o: /Users/jon/survive/src/Game.cpp \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/VertexBuffer.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iomanip \
   /Users/jon/survive/src/ResourceManager.h \
   /Users/jon/survive/src/InputHandler.h /Users/jon/survive/src/Weapon.h \
   /Users/jon/survive/src/Rectangle.h /Users/jon/survive/src/Bullet.h \

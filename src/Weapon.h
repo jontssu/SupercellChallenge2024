@@ -16,11 +16,14 @@ public:
     bool isActive() { return m_isActive; }
 
     void increaseDamage(float amount) { m_bulletDamage += amount; } 
+    float getBulletDamage() const { return m_bulletDamage; }
 
-    float getNextBulletCooldown() const { return m_nextBulletCooldown; }
-    void setNextBulletCooldown(float cooldown) { m_nextBulletCooldown = cooldown; }
+
+    float getFireRate() const { return m_nextBulletCooldown; }
+    void setFireRate(float cooldown) { m_nextBulletCooldown = cooldown; }
 
     void increasePiercing(int amount) { m_piercing += amount; }
+    float getPierceCount() const { return m_piercing; }
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void bulletSpawner(float deltaTime);

@@ -4,6 +4,8 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 
 #include "ResourceManager.h"
 #include "InputHandler.h"
@@ -166,6 +168,7 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
     for (auto& temp : m_pVampires)
         temp->draw(target, states);
 
+    // GO SHOPPING YE
     if (m_state == State::PAUSED)
     {
         // Shop background
@@ -196,9 +199,11 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
         float startX = shopBgX + (ShopBgSize.x - totalWidth) / 2;
         float startY = (ScreenHeight - ShopBgSize.y) / 2 + 120;
         const char* shopNames[] = {
-            "Health", "Damage", "Fire\nRate", "Piercing", "Player\nSpeed",
+            "Health", "Damage", "FireRate", "Piercing", "Player\nSpeed",
             "Unlock\nBase", "Base\nHealth", "Base\nDamage", "Base\nFireRate", "Base\nPiercing"
         };
+        float rowCushion = 32.0f; // Extra space between rows for prices
+        float row2Y = startY + iconSize + iconSpacing + rowCushion;
         // First row
         for (int i = 0; i < iconsPerRow; ++i)
         {
@@ -216,9 +221,25 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
             label.setFillColor(sf::Color::White);
             label.setPosition(startX + i * (iconSize + iconSpacing) + 8, startY + iconSize/2 - 12);
             target.draw(label);
+
+            // Draw price below icon
+            sf::Text priceText;
+            priceText.setFont(m_font);
+            int price = 0;
+            switch (i) {
+                case 0: price = m_upgradeMaxHealthCost; break;
+                case 1: price = m_upgradeDamageCost; break;
+                case 2: price = m_upgradeFireRateCost; break;
+                case 3: price = m_upgradePiercingCost; break;
+                case 4: price = m_upgradePlayerSpeedCost; break;
+            }
+            priceText.setString("$" + std::to_string(price));
+            priceText.setCharacterSize(14);
+            priceText.setFillColor(sf::Color::Yellow);
+            priceText.setPosition(startX + i * (iconSize + iconSpacing) + 8, startY + iconSize + 4);
+            target.draw(priceText);
         }
         // Second row
-        float row2Y = startY + iconSize + iconSpacing;
         for (int i = iconsPerRow; i < numIcons; ++i)
         {
             int rowIdx = i - iconsPerRow;
@@ -236,6 +257,49 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
             label.setFillColor(sf::Color::White);
             label.setPosition(startX + rowIdx * (iconSize + iconSpacing) + 8, row2Y + iconSize/2 - 12);
             target.draw(label);
+
+            // Draw price below icon
+            sf::Text priceText;
+            priceText.setFont(m_font);
+            int price = 0;
+            switch (i) {
+                case 5: price = m_upgradeBaseUnlockCost; break;
+                case 6: price = m_upgradeBaseHealthCost; break;
+                case 7: price = m_upgradeBaseDamageCost; break;
+                case 8: price = m_upgradeBaseFireRateCost; break;
+                case 9: price = m_upgradeBasePiercingCost; break;
+            }
+            priceText.setString("$" + std::to_string(price));
+            priceText.setCharacterSize(14);
+            priceText.setFillColor(sf::Color::Yellow);
+            priceText.setPosition(startX + rowIdx * (iconSize + iconSpacing) + 8, row2Y + iconSize + 4);
+            target.draw(priceText);
+
+            //  Draw stats
+            sf::Text statText;
+            statText.setFont(m_font);
+            statText.setFillColor(sf::Color::White);
+            statText.setPosition((ScreenWidth + ShopBgSize.x) / 2 + 128, (ScreenHeight - ShopBgSize.y) / 2 - 64);
+
+            std::ostringstream oss;
+            oss << std::fixed << std::setprecision(2) << m_pPlayer->getWeapon()->getFireRate();
+            std::string fireRateStr = oss.str();
+            oss.str("");
+            oss.clear();
+            oss << std::fixed << std::setprecision(2) << m_pBase->getWeapon()->getFireRate();
+            std::string baseFireRateStr = oss.str();
+            
+
+            statText.setString("Player\n\nMax HP: " + std::to_string(static_cast<int>(m_pPlayer->getMaxHealth())) +
+                "\nDamage: " + std::to_string(static_cast<int>(m_pPlayer->getWeapon()->getBulletDamage())) +
+                "\nFire Rate: " + fireRateStr + "/s" +
+                "\nPiercing: " + std::to_string(static_cast<int>(m_pPlayer->getWeapon()->getPierceCount())) +
+                "\nSpeed: " + std::to_string(static_cast<int>(m_pPlayer->getSpeed())) +
+                "\n\nBase\n\nMax HP: " + std::to_string(static_cast<int>(m_pBase->getMaxHealth())) +
+                "\nDamage: " + std::to_string(static_cast<int>(m_pBase->getWeapon()->getBulletDamage())) +
+                "\nFire Rate: " + baseFireRateStr + "/s" +
+                "\nPiercing: " + std::to_string(static_cast<int>(m_pBase->getWeapon()->getPierceCount())));
+            target.draw(statText);
         }
     }
     else
@@ -365,7 +429,8 @@ void Game::onMousePressed(sf::Vector2i mousePos)
     float shopBgX = (ScreenWidth - ShopBgSize.x) / 2;
     float startX = shopBgX + (ShopBgSize.x - totalWidth) / 2;
     float startY = (ScreenHeight - ShopBgSize.y) / 2 + 120;
-    float row2Y = startY + iconSize + iconSpacing;
+    float rowCushion = 32.0f; // Extra space between rows for prices
+    float row2Y = startY + iconSize + iconSpacing + rowCushion;
     for (int i = 0; i < numIcons; ++i)
     {
         int rowIdx = i % iconsPerRow;
@@ -399,11 +464,11 @@ void Game::onMousePressed(sf::Vector2i mousePos)
                                 {
                                     std::cout << "Upgrading Fire Rate" << std::endl;
                                     m_playerMoney -= m_upgradeFireRateCost;
-                                    float currentCooldown = m_pPlayer->getWeapon()->getNextBulletCooldown();
+                                    float currentCooldown = m_pPlayer->getWeapon()->getFireRate();
                                     currentCooldown *= 0.9f;
                                     if (currentCooldown < 0.01f)
                                         currentCooldown = 0.01f;
-                                    m_pPlayer->getWeapon()->setNextBulletCooldown(currentCooldown);
+                                    m_pPlayer->getWeapon()->setFireRate(currentCooldown);
                                     m_upgradeFireRateCost += 25;
                                 }
                                 break;
@@ -457,11 +522,11 @@ void Game::onMousePressed(sf::Vector2i mousePos)
                                 {
                                     std::cout << "Upgrading Base Fire Rate" << std::endl;
                                     m_playerMoney -= m_upgradeBaseFireRateCost;
-                                    float currentCooldown = m_pBase->getWeapon()->getNextBulletCooldown();
+                                    float currentCooldown = m_pBase->getWeapon()->getFireRate();
                                     currentCooldown *= 0.9f;
                                     if (currentCooldown < 0.01f)
                                         currentCooldown = 0.01f;
-                                    m_pBase->getWeapon()->setNextBulletCooldown(currentCooldown);
+                                    m_pBase->getWeapon()->setFireRate(currentCooldown);
                                     m_upgradeBaseFireRateCost += 25;
                                 }
                                 break;

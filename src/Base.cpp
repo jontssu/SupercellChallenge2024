@@ -22,7 +22,7 @@ bool Base::initialise()
 	m_maxHealth = BaseStartingHealth;
 	m_isDestroyed = false;
 	// Set weapon stats for base
-	m_pWeapon->setNextBulletCooldown(BaseFireRate);
+	m_pWeapon->setFireRate(BaseFireRate);
 	m_pWeapon->increaseDamage(BaseDamage - WeaponBulletDamage); // Adjust to base damage
 	m_pWeapon->increasePiercing((int)BasePierceCount - WeaponPierceCount); // Adjust to base pierce
 	return true;

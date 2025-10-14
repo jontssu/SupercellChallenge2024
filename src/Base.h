@@ -19,6 +19,8 @@ public:
 	void update(float deltaTime);
 
 	void increaseMaxHealth(float amount) { m_maxHealth += amount; }
+	float getMaxHealth() const { return m_maxHealth; }
+
 	void increaseDamage(float amount) { m_damage += amount; }
 
 	void unlockBase(bool unlock) { m_isUnlocked = unlock; }
