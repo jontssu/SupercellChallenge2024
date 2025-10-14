@@ -32,7 +32,7 @@ const float BaseDamage = 100.0f;
 const float BaseFireRate = 5.0f;
 const float BasePierceCount = 1.0f;
 
-const sf::Vector2f ShopBgSize = sf::Vector2f(450.0f, 300.0f);
+const sf::Vector2f ShopBgSize = sf::Vector2f(500.0f, 380.0f);
 
 const float GameStartWaitingTime = 1.0f;
 const bool PlayerImmunity = true;

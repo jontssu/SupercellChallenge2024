@@ -234,10 +234,10 @@ _deps/sfml-build/src/SFML/Window/clean: _deps/sfml-build/src/SFML/Window/CMakeFi
 # Target rules for target CMakeFiles/survive.dir
 
 # All Build rule for target.
-CMakeFiles/survive.dir/all: _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/all
-CMakeFiles/survive.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/all
 CMakeFiles/survive.dir/all: _deps/sfml-build/src/SFML/Network/CMakeFiles/sfml-network.dir/all
 CMakeFiles/survive.dir/all: _deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/all
+CMakeFiles/survive.dir/all: _deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/all
+CMakeFiles/survive.dir/all: _deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/all
 CMakeFiles/survive.dir/all: _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/build

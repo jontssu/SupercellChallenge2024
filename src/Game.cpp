@@ -186,15 +186,21 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
         shopText.setPosition((ScreenWidth - ShopBgSize.x) / 2 + 40, (ScreenHeight - ShopBgSize.y) / 2 + 40);
         target.draw(shopText);
 
-        // Shop UI: 5 clickable icons
-        int numIcons = 5;
+        // Shop UI: 10 clickable icons for all ShopOption enums except NONE
+        int numIcons = m_baseUnlocked ? 10 : 6;
+        int iconsPerRow = 5;
         float iconSize = 64.0f;
-        float iconSpacing = 24.0f;
-        float totalWidth = iconSize * numIcons + iconSpacing * (numIcons - 1);
+        float iconSpacing = 18.0f;
+        float totalWidth = iconSize * iconsPerRow + iconSpacing * (iconsPerRow - 1);
         float shopBgX = (ScreenWidth - ShopBgSize.x) / 2;
         float startX = shopBgX + (ShopBgSize.x - totalWidth) / 2;
         float startY = (ScreenHeight - ShopBgSize.y) / 2 + 120;
-        for (int i = 0; i < numIcons; ++i)
+        const char* shopNames[] = {
+            "Health", "Damage", "Fire\nRate", "Piercing", "Player\nSpeed",
+            "Unlock\nBase", "Base\nHealth", "Base\nDamage", "Base\nFireRate", "Base\nPiercing"
+        };
+        // First row
+        for (int i = 0; i < iconsPerRow; ++i)
         {
             sf::RectangleShape icon(sf::Vector2f(iconSize, iconSize));
             icon.setFillColor(sf::Color(80, 80, 200, 220));
@@ -205,16 +211,30 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
             sf::Text label;
             label.setFont(m_font);
-            // Map enum to string
-            const char* shopNames[] = {"None", "Health", "Damage", "Fire Rate", "Piercing", "Player Speed"};
-            if (i == numIcons - 1) {
-                label.setString("Player\n Speed");
-            } else {
-                label.setString(shopNames[i + 1]); // i+1 to skip NONE
-            }
+            label.setString(shopNames[i]);
             label.setCharacterSize(16);
             label.setFillColor(sf::Color::White);
             label.setPosition(startX + i * (iconSize + iconSpacing) + 8, startY + iconSize/2 - 12);
+            target.draw(label);
+        }
+        // Second row
+        float row2Y = startY + iconSize + iconSpacing;
+        for (int i = iconsPerRow; i < numIcons; ++i)
+        {
+            int rowIdx = i - iconsPerRow;
+            sf::RectangleShape icon(sf::Vector2f(iconSize, iconSize));
+            icon.setFillColor(sf::Color(80, 80, 200, 220));
+            icon.setOutlineColor(sf::Color::White);
+            icon.setOutlineThickness(3);
+            icon.setPosition(startX + rowIdx * (iconSize + iconSpacing), row2Y);
+            target.draw(icon);
+
+            sf::Text label;
+            label.setFont(m_font);
+            label.setString(shopNames[i]);
+            label.setCharacterSize(16);
+            label.setFillColor(sf::Color::White);
+            label.setPosition(startX + rowIdx * (iconSize + iconSpacing) + 8, row2Y + iconSize/2 - 12);
             target.draw(label);
         }
     }
@@ -336,107 +356,127 @@ void Game::onMousePressed(sf::Vector2i mousePos)
     if (m_state != State::PAUSED)
         return;
 
-    int numIcons = 5;
+    // Shop UI: 10 clickable icons for all ShopOption enums except NONE
+    int numIcons = 10;
+    int iconsPerRow = 5;
     float iconSize = 64.0f;
-    float iconSpacing = 24.0f;
-    float totalWidth = iconSize * numIcons + iconSpacing * (numIcons - 1);
+    float iconSpacing = 18.0f;
+    float totalWidth = iconSize * iconsPerRow + iconSpacing * (iconsPerRow - 1);
     float shopBgX = (ScreenWidth - ShopBgSize.x) / 2;
     float startX = shopBgX + (ShopBgSize.x - totalWidth) / 2;
     float startY = (ScreenHeight - ShopBgSize.y) / 2 + 120;
-
+    float row2Y = startY + iconSize + iconSpacing;
     for (int i = 0; i < numIcons; ++i)
     {
-        sf::FloatRect iconRect(
-            startX + i * (iconSize + iconSpacing),
-            startY,
-            iconSize,
-            iconSize
-        );
-        if (iconRect.contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y)))
-        {
-            switch (i)
-            {
-            case 0:
-                if (m_playerMoney >= m_upgradeMaxHealthCost)
-                {
-                    std::cout << "Upgrading Max Health" << std::endl;
-                    m_playerMoney -= m_upgradeMaxHealthCost;
-                    m_pPlayer->increaseMaxHealth(20);
-                    m_pPlayer->heal(20);
-                    m_upgradeMaxHealthCost += 25;
+        int rowIdx = i % iconsPerRow;
+        float iconY = (i < iconsPerRow) ? startY : row2Y;
+        sf::FloatRect iconRect(startX + rowIdx * (iconSize + iconSpacing), iconY, iconSize, iconSize);
+        if (iconRect.contains((float)mousePos.x, (float)mousePos.y))
+                    {
+                        // Handle shop purchase for icon i (corresponds to ShopOption enum order, skipping NONE)
+                        switch (i)
+                        {
+                            case 0: // HEALTH
+                                if (m_playerMoney >= m_upgradeMaxHealthCost)
+                                {
+                                    std::cout << "Upgrading Health" << std::endl;
+                                    m_playerMoney -= m_upgradeMaxHealthCost;
+                                    m_pPlayer->increaseMaxHealth(20);
+                                    m_upgradeMaxHealthCost += 25;
+                                }
+                                break;
+                            case 1: // DAMAGE
+                                if (m_playerMoney >= m_upgradeDamageCost)
+                                {
+                                    std::cout << "Upgrading Damage" << std::endl;
+                                    m_playerMoney -= m_upgradeDamageCost;
+                                    m_pPlayer->increaseDamage(50);
+                                    m_upgradeDamageCost += 25;
+                                }
+                                break;
+                            case 2: // FIRE_RATE
+                                if (m_playerMoney >= m_upgradeFireRateCost)
+                                {
+                                    std::cout << "Upgrading Fire Rate" << std::endl;
+                                    m_playerMoney -= m_upgradeFireRateCost;
+                                    float currentCooldown = m_pPlayer->getWeapon()->getNextBulletCooldown();
+                                    currentCooldown *= 0.9f;
+                                    if (currentCooldown < 0.01f)
+                                        currentCooldown = 0.01f;
+                                    m_pPlayer->getWeapon()->setNextBulletCooldown(currentCooldown);
+                                    m_upgradeFireRateCost += 25;
+                                }
+                                break;
+                            case 3: // PIERCING
+                                if (m_playerMoney >= m_upgradePiercingCost)
+                                {
+                                    std::cout << "Upgrading Piercing" << std::endl;
+                                    m_playerMoney -= m_upgradePiercingCost;
+                                    m_pPlayer->getWeapon()->increasePiercing(1);
+                                    m_upgradePiercingCost += 100;
+                                }
+                                break;
+                            case 4: // PLAYER_SPEED
+                                if (m_playerMoney >= m_upgradePlayerSpeedCost)
+                                {
+                                    std::cout << "Upgrading Player Speed" << std::endl;
+                                    m_playerMoney -= m_upgradePlayerSpeedCost;
+                                    m_pPlayer->increaseSpeed(20.0f);
+                                    m_upgradePlayerSpeedCost += 50;
+                                }
+                                break;
+                            case 5: // UNLOCK_BASE
+                                if (m_playerMoney >= m_upgradeBaseUnlockCost && !m_baseUnlocked)
+                                {
+                                    std::cout << "Unlocking Base" << std::endl;
+                                    m_playerMoney -= m_upgradeBaseUnlockCost;
+                                    m_pBase->unlockBase(true);
+                                    m_baseUnlocked = true;
+                                }
+                                break;
+                            case 6: // BASE_BEALTH
+                                if (m_playerMoney >= m_upgradeBaseHealthCost && m_baseUnlocked)
+                                {
+                                    std::cout << "Upgrading Base Health" << std::endl;
+                                    m_playerMoney -= m_upgradeBaseHealthCost;
+                                    m_pBase->increaseMaxHealth(20);
+                                    m_upgradeBaseHealthCost += 25;
+                                }
+                                break;
+                            case 7: // BASE_DAMAGE
+                                if (m_playerMoney >= m_upgradeBaseDamageCost && m_baseUnlocked)
+                                {
+                                    std::cout << "Upgrading Base Damage" << std::endl;
+                                    m_playerMoney -= m_upgradeBaseDamageCost;
+                                    m_pBase->increaseDamage(50);
+                                    m_upgradeBaseDamageCost += 25;
+                                }
+                                break;
+                            case 8: // BASE_FIRE_RATE
+                                if (m_playerMoney >= m_upgradeBaseFireRateCost && m_baseUnlocked)
+                                {
+                                    std::cout << "Upgrading Base Fire Rate" << std::endl;
+                                    m_playerMoney -= m_upgradeBaseFireRateCost;
+                                    float currentCooldown = m_pBase->getWeapon()->getNextBulletCooldown();
+                                    currentCooldown *= 0.9f;
+                                    if (currentCooldown < 0.01f)
+                                        currentCooldown = 0.01f;
+                                    m_pBase->getWeapon()->setNextBulletCooldown(currentCooldown);
+                                    m_upgradeBaseFireRateCost += 25;
+                                }
+                                break;
+                            case 9: // BASE_PIERCING
+                                if (m_playerMoney >= m_upgradeBasePiercingCost && m_baseUnlocked)
+                                {
+                                    std::cout << "Upgrading Base Piercing" << std::endl;
+                                    m_playerMoney -= m_upgradeBasePiercingCost;
+                                    m_pBase->getWeapon()->increasePiercing(1);
+                                    m_upgradeBasePiercingCost += 100;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
-                break;
-            case 1:
-                if (m_playerMoney >= m_upgradeDamageCost)
-                {
-                    std::cout << "Upgrading Damage" << std::endl;
-                    m_playerMoney -= m_upgradeDamageCost;
-                    m_pPlayer->getWeapon()->increaseDamage(50);
-                    m_upgradeDamageCost += 25;
-                }
-                break;
-            case 2:
-                if (m_playerMoney >= m_upgradeFireRateCost)
-                {
-                    std::cout << "Upgrading Fire Rate" << std::endl;
-                    m_playerMoney -= m_upgradeFireRateCost;
-                    // Decrease bullet cooldown by 10%, minimum 0.01s
-                    float currentCooldown = m_pPlayer->getWeapon()->getNextBulletCooldown();
-                    currentCooldown *= 0.9f;
-                    if (currentCooldown < 0.01f)
-                        currentCooldown = 0.01f;
-                    m_pPlayer->getWeapon()->setNextBulletCooldown(currentCooldown);
-                    m_upgradeFireRateCost += 25;
-                }
-                break;
-            case 3:
-                if (m_playerMoney >= m_upgradePiercingCost)
-                {
-                    std::cout << "Upgrading Piercing" << std::endl;
-                    m_playerMoney -= m_upgradePiercingCost;
-                    m_pPlayer->getWeapon()->increasePiercing(1);
-                    m_upgradePiercingCost += 100;
-                }
-                break;
-            case 4:
-                if (m_playerMoney >= m_upgradePlayerSpeedCost)
-                {
-                    std::cout << "Upgrading Player Speed" << std::endl;
-                    m_playerMoney -= m_upgradePlayerSpeedCost;
-                    m_pPlayer->increaseSpeed(20.0f);
-                    m_upgradePlayerSpeedCost += 50;
-                }
-                break;
-            case 5:
-                if (m_playerMoney >= m_upgradeBaseUnlockCost && !m_baseUnlocked)
-                {
-                    std::cout << "Unlocking Base" << std::endl;
-                    m_playerMoney -= m_upgradeBaseUnlockCost;
-                    m_pBase->unlockBase(true);
-                    m_baseUnlocked = true;
-                }
-                break;
-            case 6:
-                if (m_playerMoney >= m_upgradeBaseHealthCost && m_baseUnlocked)
-                {
-                    std::cout << "Upgrading Base Health" << std::endl;
-                    m_playerMoney -= m_upgradeBaseHealthCost;
-                    m_pBase->increaseMaxHealth(20);
-                    m_upgradeBaseHealthCost += 25;
-                }
-                break;
-            case 7:
-                if (m_playerMoney >= m_upgradeBaseDamageCost && m_baseUnlocked)
-                {
-                    std::cout << "Upgrading Base Damage" << std::endl;
-                    m_playerMoney -= m_upgradeBaseDamageCost;
-                    m_pBase->increaseDamage(50);
-                    m_upgradeBaseDamageCost += 25;
-                }
-                break;
-            default:
-                break;
             }
-        }
-    }
-}

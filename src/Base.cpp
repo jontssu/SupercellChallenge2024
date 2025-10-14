@@ -46,6 +46,8 @@ void Base::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	healthBarBack.setPosition(getPosition().x - m_hpBarWidth / 2, getPosition().y - getSize().y / 2 - 10 - 10);
 	target.draw(healthBarBack, states);	
 
+	if (!m_isUnlocked)
+		return;
 	m_pWeapon->setPosition(getPosition());
 	m_pWeapon->draw(target, states);
 }
@@ -58,6 +60,10 @@ void Base::update(float deltaTime)
 			setColor(m_normalColor);
 		}
 	}
+
+	if (!m_isUnlocked)
+		return;
+
 	// Update weapon position to base center
 	sf::Vector2f weaponSize = m_pWeapon->getSize();
 	m_pWeapon->setPosition(sf::Vector2f(

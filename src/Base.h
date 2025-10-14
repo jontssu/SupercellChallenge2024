@@ -26,6 +26,8 @@ public:
 	bool isDestroyed() const { return m_isDestroyed; }
 	void setIsDestroyed(bool isDestroyed) { m_isDestroyed = BaseImmunity == true ? false : isDestroyed; }
 
+	Weapon* getWeapon() { return m_pWeapon.get(); }
+
 private:
 	Game* m_pGame;
 	std::unique_ptr<Weapon> m_pWeapon;
