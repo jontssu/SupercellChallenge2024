@@ -33,12 +33,11 @@ void Player::move(InputData inputData, float deltaTime)
     
     xSpeed -= inputData.m_movingLeft * PlayerSpeed;
     xSpeed += inputData.m_movingRight * PlayerSpeed;
-    xSpeed *= deltaTime * 4;
-    //change
+    xSpeed *= deltaTime;
 
     ySpeed -= inputData.m_movingUp * PlayerSpeed;
     ySpeed += inputData.m_movingDown * PlayerSpeed;
-    ySpeed *= deltaTime * 4;
+    ySpeed *= deltaTime;
     
     sf::Vector2f position = sf::Transformable::getPosition();
     if (position.x + xSpeed > ScreenWidth - PlayerWidth || position.x + xSpeed < 0)
@@ -59,8 +58,8 @@ void Player::move(InputData inputData, float deltaTime)
 
 void Player::attack()
 {
-    m_pWeapon->setPosition(getCenter());
-    m_pWeapon->setActive(true);
+    // m_pWeapon->setPosition(getCenter());
+    // m_pWeapon->setActive(true);
 }
 
 void Player::update(float deltaTime)

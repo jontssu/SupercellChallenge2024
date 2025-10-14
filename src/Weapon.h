@@ -30,6 +30,8 @@ private:
     float m_laserActiveTime = WeaponLaserActiveTime;
     float m_laserCooldown = WeaponLaserCoolDown;
 
+    float m_bulletSpeed = WeaponProjectileSpeed;
+
     Game* m_pGame;
     std::vector<std::unique_ptr<Bullet>> m_pBullets;
 };

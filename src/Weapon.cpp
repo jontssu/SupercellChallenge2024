@@ -33,6 +33,7 @@ void Weapon::update(float deltaTime)
         return;
     if (DisableLaser)
     {
+        
     }
     else if (!m_isActive)
     {
@@ -51,8 +52,9 @@ void Weapon::update(float deltaTime)
         }
     }
 
+
     if (DisableGun)
-        return;
+        return; 
     //Spawn bullets
     bulletSpawner(deltaTime);
 
@@ -111,7 +113,7 @@ void Weapon::bulletSpawner(float deltaTime)
             sf::Vector2f bulletDir(0.f, -1.f); // default upward
             if (len > 0.01f)
                 bulletDir = dir / len;
-            m_pBullets.push_back(std::make_unique<Bullet>(weaponPos, bulletDir));
+            m_pBullets.push_back(std::make_unique<Bullet>(weaponPos, bulletDir, m_bulletSpeed));
             m_bulletCooldown = m_nextBulletCooldown;
         }
     }

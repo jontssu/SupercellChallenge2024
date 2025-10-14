@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "MathUtils.h"
 #include "Base.h"
+#include "Bullet.h"
 
 Vampire::Vampire(Game* game, sf::Vector2f position) :
     Rectangle(sf::Vector2f(VampireWidth, VampireHeight)),
@@ -35,8 +36,10 @@ void Vampire::update(float deltaTime)
     // Check collision with bullets
     for (const auto& bullet : pPlayer->getWeapon()->getBullets()) {
         if (collidesWith(bullet.get())) {
-            setIsKilled(true);
-            bullet->setPierceCount(bullet->getPierceCount() - 1);
+            if (bullet->getPierceCount() > 0) {
+                setIsKilled(true);
+                bullet->setPierceCount(bullet->getPierceCount() - 1);
+            }
             if (bullet->getPierceCount() <= 0) {
                 bullet->setDead(true);
             }
@@ -70,6 +73,18 @@ void Vampire::update(float deltaTime)
         targetCenter = pPlayer->getCenter();
     else
         targetCenter = pBase->getCenter();
+
+    // Anti-stacking: push away from nearby vampires
+    for (const auto& other : m_pGame->getVampires()) {
+        if (other.get() == this || other->isKilled()) continue;
+        sf::Vector2f toOther = getCenter() - other->getCenter();
+        float dist = VecLength(toOther);
+        float minDist = VampireWidth * 0.8f; // threshold for repulsion
+        if (dist < minDist && dist > 0.01f) {
+            sf::Vector2f repulse = VecNormalized(toOther) * ((minDist - dist) * 0.5f);
+            sf::Transformable::move(repulse);
+        }
+    }
 
     // Move towards target
     sf::Vector2f direction = VecNormalized(targetCenter - getCenter());

@@ -6,7 +6,7 @@
 class Bullet : public Rectangle
 {
 public:
-    Bullet(const sf::Vector2f& position, const sf::Vector2f& direction, float speed = 800.f, float lifetime = 2.f);
+    Bullet(const sf::Vector2f& position, const sf::Vector2f& direction, float speed, float lifetime = 2.f);
     virtual ~Bullet() {}
 
     void update(float deltaTime);

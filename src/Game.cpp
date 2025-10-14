@@ -133,6 +133,7 @@ void Game::update(float deltaTime)
         if (m_pVampires[i]->isKilled())
         {
             m_playerMoney += m_pVampires[i]->getDifficultyScaling() * VampireBaseReward;
+            m_totalKills += 1;
             std::swap(m_pVampires[i], m_pVampires.back());
             m_pVampires.pop_back();
             continue;
@@ -144,7 +145,6 @@ void Game::update(float deltaTime)
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-    //  Draw texts.
     if (m_state == State::WAITING)
     {
         sf::Text startText;
@@ -154,9 +154,18 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
         startText.setPosition(80.0f, 80.0f);
         startText.setStyle(sf::Text::Bold);
         target.draw(startText);
+        return;
     }
-    else if (m_state == State::PAUSED)
+
+    // Draw base, player, vampires for ACTIVE and PAUSED
+    m_pBase->draw(target, states);
+    m_pPlayer->draw(target, states);
+    for (auto& temp : m_pVampires)
+        temp->draw(target, states);
+
+    if (m_state == State::PAUSED)
     {
+        // Shop background
         sf::RectangleShape shopBg(sf::Vector2f(400, 300));
         shopBg.setFillColor(sf::Color(30, 30, 30, 220));
         shopBg.setOutlineColor(sf::Color::Yellow);
@@ -164,6 +173,7 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
         shopBg.setPosition((ScreenWidth - 400) / 2, (ScreenHeight - 300) / 2);
         target.draw(shopBg);
 
+        // Shop text
         sf::Text shopText;
         shopText.setFont(m_font);
         shopText.setString("SHOP\nPress B to resume");
@@ -172,7 +182,29 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
         shopText.setStyle(sf::Text::Bold);
         shopText.setPosition((ScreenWidth - 400) / 2 + 40, (ScreenHeight - 300) / 2 + 40);
         target.draw(shopText);
-        // You can add more shop UI here
+
+        // Shop UI: 5 clickable icons
+        float iconSize = 64.0f;
+        float iconSpacing = 24.0f;
+        float startX = (ScreenWidth - 400) / 2 + 40;
+        float startY = (ScreenHeight - 300) / 2 + 120;
+        for (int i = 0; i < 5; ++i)
+        {
+            sf::RectangleShape icon(sf::Vector2f(iconSize, iconSize));
+            icon.setFillColor(sf::Color(80, 80, 200, 220));
+            icon.setOutlineColor(sf::Color::White);
+            icon.setOutlineThickness(3);
+            icon.setPosition(startX + i * (iconSize + iconSpacing), startY);
+            target.draw(icon);
+
+            sf::Text label;
+            label.setFont(m_font);
+            label.setString("Item " + std::to_string(i+1));
+            label.setCharacterSize(18);
+            label.setFillColor(sf::Color::White);
+            label.setPosition(startX + i * (iconSize + iconSpacing) + 8, startY + iconSize/2 - 12);
+            target.draw(label);
+        }
     }
     else
     {
@@ -180,23 +212,11 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
         timerText.setFont(m_font);
         timerText.setFillColor(sf::Color::White);
         timerText.setStyle(sf::Text::Bold);
-        timerText.setString(std::to_string((int)m_pClock->getElapsedTime().asSeconds()));
+        timerText.setString("Kills " + std::to_string(m_totalKills));
         timerText.setPosition(sf::Vector2f((ScreenWidth - timerText.getLocalBounds().getSize().x) * 0.5, 20));
         target.draw(timerText);
     }
-
-    //  Draw base.
-    m_pBase->draw(target, states);  
-
-    // Draw player.
-    m_pPlayer->draw(target, states);
-
-    //  Draw world.
-    for (auto& temp : m_pVampires)
-    {
-        temp->draw(target, states);
-    }
-
+    
     // Draw FPS
     sf::Text fpsText;
     fpsText.setFont(m_font);

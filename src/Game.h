@@ -75,6 +75,7 @@ private:
     int m_fps = 0;
 
     int m_playerMoney = 0;
-
     bool m_shopOpen = false;
+
+    int m_totalKills = 0;
 };
