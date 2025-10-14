@@ -207,7 +207,7 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
             // Map enum to string
             const char* shopNames[] = {"None", "Health", "Damage", "Fire Rate", "Piercing", "Player Speed"};
             if (i == numIcons - 1) {
-                label.setString("Player\nSpeed");
+                label.setString("Player\n Speed");
             } else {
                 label.setString(shopNames[i + 1]); // i+1 to skip NONE
             }

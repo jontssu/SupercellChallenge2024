@@ -23,7 +23,6 @@ Bullet::Bullet(const sf::Vector2f& position, const sf::Vector2f& direction, floa
     setPosition(position);
     setColor(sf::Color::Red);
     m_velocity = direction * speed;
-    std::cout << "My piercing is: " << m_pierceCount << std::endl;
 }
 
 void Bullet::update(float deltaTime)
