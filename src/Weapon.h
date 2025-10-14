@@ -26,6 +26,9 @@ private:
 
     float m_bulletCooldown = 0.0f;
     float m_nextBulletCooldown = StartBulletCooldown;
+    
+    float m_laserActiveTime = WeaponLaserActiveTime;
+    float m_laserCooldown = WeaponLaserCoolDown;
 
     Game* m_pGame;
     std::vector<std::unique_ptr<Bullet>> m_pBullets;

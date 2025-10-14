@@ -29,14 +29,30 @@ void Weapon::setActive(bool isActive)
 
 void Weapon::update(float deltaTime)
 {
-    if (m_isActive)
+    if (DisableWeapons)
+        return;
+    if (DisableLaser)
     {
-        m_timer -= deltaTime;
-        if (m_timer <= 0.0f)
+    }
+    else if (!m_isActive)
+    {
+        m_laserCooldown -= deltaTime;
+        if (m_laserCooldown <= 0.0f)
+            setActive(true);
+    }
+    else
+    {
+        m_laserActiveTime -= deltaTime;
+        if (m_laserActiveTime <= 0.0f)
         {
             setActive(false);
+            m_laserActiveTime = WeaponLaserActiveTime;
+            m_laserCooldown = WeaponLaserCoolDown;
         }
     }
+
+    if (DisableGun)
+        return;
     //Spawn bullets
     bulletSpawner(deltaTime);
 

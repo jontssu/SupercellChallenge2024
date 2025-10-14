@@ -17,6 +17,8 @@ const float WeaponHeight = 10.0f;
 const float WeaponWidth = 100.0f;
 const float WeaponActiveTime = 0.05f;
 const float WeaponPierceCount = 1;
+const float WeaponLaserActiveTime = 1.0f;
+const float WeaponLaserCoolDown = 5.0f;
 
 const float StartBulletCooldown = 2.0f;
 const float StartNextVampireCooldown = 2.0f;
@@ -30,3 +32,5 @@ const float GameStartWaitingTime = 0.5f;
 const bool PlayerImmunity = true;
 const bool BaseImmunity = false;
 const bool DisableWeapons = false;
+const bool DisableLaser = true;
+const bool DisableGun = false;
