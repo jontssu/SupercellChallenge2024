@@ -72,7 +72,7 @@ void Vampire::update(float deltaTime)
     if (distToPlayer < distToBase)
         targetCenter = pPlayer->getCenter();
     else
-        targetCenter = pBase->getCenter();
+        targetCenter = pBase->getCenter() - sf::Vector2f(BaseWidth * 0.5f, BaseHeight * 0.5f);
 
     // Anti-stacking: push away from nearby vampires
     for (const auto& other : m_pGame->getVampires()) {
