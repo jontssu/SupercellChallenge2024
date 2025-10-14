@@ -15,13 +15,15 @@ void Bullet::update(float deltaTime)
 
 #include "Bullet.h"
 #include "Constants.h"
+#include <iostream>
 
-Bullet::Bullet(const sf::Vector2f& position, const sf::Vector2f& direction, float speed, float lifetime)
-    : Rectangle(sf::Vector2f(10.f, 4.f)), m_lifetime(lifetime)
+Bullet::Bullet(const sf::Vector2f& position, const sf::Vector2f& direction, float speed, int pierceCount, float lifetime)
+    : Rectangle(sf::Vector2f(10.f, 4.f)), m_lifetime(lifetime), m_pierceCount(pierceCount)
 {
     setPosition(position);
     setColor(sf::Color::Red);
     m_velocity = direction * speed;
+    std::cout << "My piercing is: " << m_pierceCount << std::endl;
 }
 
 void Bullet::update(float deltaTime)

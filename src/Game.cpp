@@ -1,6 +1,7 @@
 #include "Game.h"
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window/Mouse.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
 
@@ -203,8 +204,14 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
             sf::Text label;
             label.setFont(m_font);
-            label.setString("Item " + std::to_string(i+1));
-            label.setCharacterSize(18);
+            // Map enum to string
+            const char* shopNames[] = {"None", "Health", "Damage", "Fire Rate", "Piercing", "Player Speed"};
+            if (i == numIcons - 1) {
+                label.setString("Player\nSpeed");
+            } else {
+                label.setString(shopNames[i + 1]); // i+1 to skip NONE
+            }
+            label.setCharacterSize(16);
             label.setFillColor(sf::Color::White);
             label.setPosition(startX + i * (iconSize + iconSpacing) + 8, startY + iconSize/2 - 12);
             target.draw(label);
@@ -275,29 +282,45 @@ Base* Game::getBase() const
 
 void Game::vampireSpawner(float deltaTime)
 {
+    // Infinite spawning mode
+    if (InfiniteEnemies)
+    {
+        float randomXPos = rand() % ScreenWidth;
+        float randomYPos = rand() % ScreenHeight;
+        float distToRight = (float) ScreenWidth - randomXPos;
+        float distToBottom = (float) ScreenHeight - randomYPos;
+        float xMinDist = randomXPos < distToRight ? -randomXPos : distToRight;
+        float yMinDist = randomYPos < distToBottom ? -randomYPos : distToBottom;
+        if (abs(xMinDist) < abs(yMinDist))
+            randomXPos += xMinDist;
+        else
+            randomYPos += yMinDist;
+        sf::Vector2f spawnPosition = sf::Vector2f(randomXPos, randomYPos);
+        m_pVampires.push_back(std::make_unique<Vampire>(this, spawnPosition));
+            
+        m_spawnCount++;
+        m_vampireCooldown = 0.0f;
+        return;
+    }
+
+    // Normal spawning mode
     if (m_vampireCooldown > 0.0f)
     {
         m_vampireCooldown -= deltaTime;
         return;
     }
-
     float randomXPos = rand() % ScreenWidth;
     float randomYPos = rand() % ScreenHeight;
-
     float distToRight = (float) ScreenWidth - randomXPos;
     float distToBottom = (float) ScreenHeight - randomYPos;
-
     float xMinDist = randomXPos < distToRight ? -randomXPos : distToRight;
     float yMinDist = randomYPos < distToBottom ? -randomYPos : distToBottom;
-
     if (abs(xMinDist) < abs(yMinDist))
         randomXPos += xMinDist;
     else
         randomYPos += yMinDist;
-
     sf::Vector2f spawnPosition = sf::Vector2f(randomXPos, randomYPos);
     m_pVampires.push_back(std::make_unique<Vampire>(this, spawnPosition));
-
     m_spawnCount++;
     if (m_spawnCount % 5 == 0)
     {
@@ -305,4 +328,87 @@ void Game::vampireSpawner(float deltaTime)
             m_nextVampireCooldown -= 0.1f;
     }
     m_vampireCooldown = m_nextVampireCooldown;
+}
+
+void Game::onMousePressed(sf::Vector2i mousePos)
+{
+    if (m_state != State::PAUSED)
+        return;
+
+    int numIcons = 5;
+    float iconSize = 64.0f;
+    float iconSpacing = 24.0f;
+    float totalWidth = iconSize * numIcons + iconSpacing * (numIcons - 1);
+    float shopBgX = (ScreenWidth - ShopBgSize.x) / 2;
+    float startX = shopBgX + (ShopBgSize.x - totalWidth) / 2;
+    float startY = (ScreenHeight - ShopBgSize.y) / 2 + 120;
+
+    for (int i = 0; i < numIcons; ++i)
+    {
+        sf::FloatRect iconRect(
+            startX + i * (iconSize + iconSpacing),
+            startY,
+            iconSize,
+            iconSize
+        );
+        if (iconRect.contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y)))
+        {
+            switch (i)
+            {
+            case 0:
+                if (m_playerMoney >= m_upgradeMaxHealthCost)
+                {
+                    std::cout << "Upgrading Max Health" << std::endl;
+                    m_playerMoney -= m_upgradeMaxHealthCost;
+                    m_pPlayer->increaseMaxHealth(20);
+                    m_pPlayer->heal(20);
+                    m_upgradeMaxHealthCost += 25;
+                }
+                break;
+            case 1:
+                if (m_playerMoney >= m_upgradeDamageCost)
+                {
+                    std::cout << "Upgrading Damage" << std::endl;
+                    m_playerMoney -= m_upgradeDamageCost;
+                    m_pPlayer->getWeapon()->increaseDamage(50);
+                    m_upgradeDamageCost += 25;
+                }
+                break;
+            case 2:
+                if (m_playerMoney >= m_upgradeFireRateCost)
+                {
+                    std::cout << "Upgrading Fire Rate" << std::endl;
+                    m_playerMoney -= m_upgradeFireRateCost;
+                    // Decrease bullet cooldown by 10%, minimum 0.01s
+                    float currentCooldown = m_pPlayer->getWeapon()->getNextBulletCooldown();
+                    currentCooldown *= 0.9f;
+                    if (currentCooldown < 0.01f)
+                        currentCooldown = 0.01f;
+                    m_pPlayer->getWeapon()->setNextBulletCooldown(currentCooldown);
+                    m_upgradeFireRateCost += 25;
+                }
+                break;
+            case 3:
+                if (m_playerMoney >= m_upgradePiercingCost)
+                {
+                    std::cout << "Upgrading Piercing" << std::endl;
+                    m_playerMoney -= m_upgradePiercingCost;
+                    m_pPlayer->getWeapon()->increasePiercing(1);
+                    m_upgradePiercingCost += 100;
+                }
+                break;
+            case 4:
+                if (m_playerMoney >= m_upgradePlayerSpeedCost)
+                {
+                    std::cout << "Upgrading Player Speed" << std::endl;
+                    m_playerMoney -= m_upgradePlayerSpeedCost;
+                    m_pPlayer->increaseSpeed(20.0f);
+                    m_upgradePlayerSpeedCost += 50;
+                }
+                break;
+            default:
+                break;
+            }
+        }
+    }
 }

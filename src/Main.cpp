@@ -42,6 +42,8 @@ int main(int argc, char* argv[])
                 case sf::Event::KeyReleased:
                     pGame->onKeyReleased(event.key.code);
                     break;
+                case sf::Event::MouseButtonPressed:
+                    pGame->onMousePressed(sf::Mouse::getPosition(window));
                 default:
                     break;
             }

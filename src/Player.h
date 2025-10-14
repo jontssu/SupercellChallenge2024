@@ -28,6 +28,13 @@ public:
     void update(float deltaTime);
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
+    void heal(float amount) { m_currentHealth = m_currentHealth + amount; }
+    void increaseMaxHealth(float amount) { m_currentHealth = m_currentHealth + amount; }
+    float getMaxHealth() const { return m_maxHealth; }
+    float getCurrentHealth() const { return m_currentHealth; }
+
+    void increaseSpeed(float amount) { m_playerSpeed += amount; }
+
     bool isDead() const { return m_isDead; }
     void setIsDead(bool isDead) { m_isDead = PlayerImmunity == true ? false : isDead; }
 
@@ -35,8 +42,13 @@ public:
     eDirection getDirection() const { return m_direction; }
 
 private:
+    float m_maxHealth = PlayerMaxHealth;
+    float m_currentHealth = m_maxHealth;
+    float m_playerSpeed = PlayerSpeed;
     bool    m_isDead = false;
+
     eDirection m_direction = LEFT;
+
     Game*   m_pGame;
     std::unique_ptr<Weapon> m_pWeapon;
 };

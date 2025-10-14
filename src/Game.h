@@ -25,6 +25,16 @@ public:
         ACTIVE,
         PAUSED,
     };
+
+    enum class ShopOption
+    {
+        NONE,
+        HEALTH,
+        DAMAGE,
+        FIRE_RATE,
+        PIERCING,
+        PLAYER_SPEED
+    };
     
     Game();
     ~Game();
@@ -38,6 +48,7 @@ public:
     
     void onKeyPressed(sf::Keyboard::Key key);
     void onKeyReleased(sf::Keyboard::Key key);
+    void onMousePressed(sf::Vector2i mousePos);
 
     Player* getPlayer() const;
     Base* getBase() const;
@@ -61,7 +72,7 @@ private:
     std::unique_ptr<GameInput> m_pGameInput;
 
     float m_vampireCooldown = 0.0f;
-    float m_nextVampireCooldown = StartNextVampireCooldown;
+    float m_nextVampireCooldown = InfiniteEnemies == true ? -1.0f : StartNextVampireCooldown;
     int m_spawnCount = 0;
     
     sf::Font m_font;
@@ -74,8 +85,14 @@ private:
     int m_fpsFrames = 0;
     int m_fps = 0;
 
-    int m_playerMoney = 0;
+    int m_playerMoney = InfiniteMoney == true ? 999999 : 0;;
     bool m_shopOpen = false;
 
     int m_totalKills = 0;
+
+    int m_upgradeMaxHealthCost = 50;
+    int m_upgradeDamageCost = 50;
+    int m_upgradeFireRateCost = 50;
+    int m_upgradePiercingCost = 100;
+    int m_upgradePlayerSpeedCost = 50;
 };

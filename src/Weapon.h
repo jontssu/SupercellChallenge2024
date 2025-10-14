@@ -15,6 +15,13 @@ public:
     void update(float deltaTime);
     bool isActive() { return m_isActive; }
 
+    void increaseDamage(float amount) { m_bulletDamage += amount; } 
+
+    float getNextBulletCooldown() const { return m_nextBulletCooldown; }
+    void setNextBulletCooldown(float cooldown) { m_nextBulletCooldown = cooldown; }
+
+    void increasePiercing(int amount) { m_piercing += amount; }
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void bulletSpawner(float deltaTime);
 
@@ -26,11 +33,13 @@ private:
 
     float m_bulletCooldown = 0.0f;
     float m_nextBulletCooldown = StartBulletCooldown;
+    float m_bulletDamage = WeaponBulletDamage;
     
     float m_laserActiveTime = WeaponLaserActiveTime;
     float m_laserCooldown = WeaponLaserCoolDown;
 
     float m_bulletSpeed = WeaponProjectileSpeed;
+    int m_piercing = WeaponPierceCount;
 
     Game* m_pGame;
     std::vector<std::unique_ptr<Bullet>> m_pBullets;

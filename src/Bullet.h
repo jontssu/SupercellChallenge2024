@@ -6,7 +6,7 @@
 class Bullet : public Rectangle
 {
 public:
-    Bullet(const sf::Vector2f& position, const sf::Vector2f& direction, float speed, float lifetime = 2.f);
+    Bullet(const sf::Vector2f& position, const sf::Vector2f& direction, float speed, int pierceCount = 1, float lifetime = 2.f) ;
     virtual ~Bullet() {}
 
     void update(float deltaTime);
@@ -23,5 +23,5 @@ private:
     sf::Vector2f m_velocity;
     float m_lifetime;
     bool m_isDead = false;
-    int m_pierceCount = WeaponPierceCount;
+    int m_pierceCount;
 };

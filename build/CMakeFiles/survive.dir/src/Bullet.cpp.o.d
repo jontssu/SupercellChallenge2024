@@ -809,4 +809,6 @@ CMakeFiles/survive.dir/src/Bullet.cpp.o: \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/Sprite.hpp \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/Text.hpp \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/VertexBuffer.hpp \
-  /Users/jon/survive/src/Constants.h
+  /Users/jon/survive/src/Constants.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/istream
