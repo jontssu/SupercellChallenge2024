@@ -10,11 +10,13 @@
 #include "Player.h"
 #include "Rectangle.h"
 #include "Vampire.h"
+#include "Base.h"
 
 Game::Game() :
     m_state(State::WAITING),
     m_pClock(std::make_unique<sf::Clock>()),
     m_pPlayer(std::make_unique<Player>(this)),
+    m_pBase(std::make_unique<Base>(this)),
     m_vampireCooldown(2.0f),
     m_nextVampireCooldown(2.0f)
 {
@@ -52,6 +54,11 @@ bool Game::initialise()
         std::cerr << "Unable to load texture" << std::endl;
         return false;
     }
+    if (!m_baseTexture.loadFromFile(ResourceManager::getFilePath("player.png")))
+    {
+        std::cerr << "Unable to load texture" << std::endl;
+        return false;
+    }   
 
     resetLevel();
     return true;
@@ -60,13 +67,22 @@ bool Game::initialise()
 void Game::resetLevel()
 {
     m_pVampires.clear();
+    m_nextVampireCooldown = StartNextVampireCooldown;
 
+    m_pBase->initialise();
     m_pPlayer->initialise();
     m_pClock->restart();
 }
 
 void Game::update(float deltaTime)
 {
+    m_fpsElapsed += deltaTime;
+    m_fpsFrames++;  
+    if (m_fpsElapsed >= 1.0f) {
+        m_fps = m_fpsFrames;
+        m_fpsFrames = 0;
+        m_fpsElapsed = 0.0f;
+    }
     switch (m_state)
     {
         case State::WAITING:
@@ -78,7 +94,7 @@ void Game::update(float deltaTime)
             }
         }
         break;
-            
+
         case State::ACTIVE:
         {
             m_pGameInput->update(deltaTime);
@@ -95,6 +111,18 @@ void Game::update(float deltaTime)
                 m_state = State::WAITING;
                 resetLevel();
             }
+
+            if (m_pBase->isDestroyed())
+            {
+                m_state = State::WAITING;
+                resetLevel();
+            }
+        }
+        break;
+
+        case State::PAUSED:
+        {
+            // Do nothing, game is paused
         }
         break;
     }
@@ -104,12 +132,14 @@ void Game::update(float deltaTime)
     {
         if (m_pVampires[i]->isKilled())
         {
+            m_playerMoney += m_pVampires[i]->getDifficultyScaling() * VampireBaseReward;
             std::swap(m_pVampires[i], m_pVampires.back());
             m_pVampires.pop_back();
             continue;
         }
         i++;
     }
+
 }
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -125,6 +155,25 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
         startText.setStyle(sf::Text::Bold);
         target.draw(startText);
     }
+    else if (m_state == State::PAUSED)
+    {
+        sf::RectangleShape shopBg(sf::Vector2f(400, 300));
+        shopBg.setFillColor(sf::Color(30, 30, 30, 220));
+        shopBg.setOutlineColor(sf::Color::Yellow);
+        shopBg.setOutlineThickness(4);
+        shopBg.setPosition((ScreenWidth - 400) / 2, (ScreenHeight - 300) / 2);
+        target.draw(shopBg);
+
+        sf::Text shopText;
+        shopText.setFont(m_font);
+        shopText.setString("SHOP\nPress B to resume");
+        shopText.setFillColor(sf::Color::White);
+        shopText.setCharacterSize(32);
+        shopText.setStyle(sf::Text::Bold);
+        shopText.setPosition((ScreenWidth - 400) / 2 + 40, (ScreenHeight - 300) / 2 + 40);
+        target.draw(shopText);
+        // You can add more shop UI here
+    }
     else
     {
         sf::Text timerText;
@@ -136,6 +185,9 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
         target.draw(timerText);
     }
 
+    //  Draw base.
+    m_pBase->draw(target, states);  
+
     // Draw player.
     m_pPlayer->draw(target, states);
 
@@ -144,11 +196,41 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
     {
         temp->draw(target, states);
     }
+
+    // Draw FPS
+    sf::Text fpsText;
+    fpsText.setFont(m_font);
+    fpsText.setCharacterSize(16);
+    fpsText.setFillColor(sf::Color::Yellow);
+    fpsText.setString("FPS: " + std::to_string(m_fps));
+    fpsText.setPosition(10, 10);
+    target.draw(fpsText);
+
+    // Draw Money
+    sf::Text moneyText;
+    moneyText.setFont(m_font);
+    moneyText.setCharacterSize(16);
+    moneyText.setFillColor(sf::Color::Yellow);
+    moneyText.setString("Money: " + std::to_string(m_playerMoney));
+    moneyText.setPosition(10, 30);
+    target.draw(moneyText);
 }
 
 
 void Game::onKeyPressed(sf::Keyboard::Key key)
 {
+    if (key == sf::Keyboard::B)
+    {
+        if (m_state == State::ACTIVE)
+        {
+            m_state = State::PAUSED;
+        }
+        else if (m_state == State::PAUSED)
+        {
+            m_state = State::ACTIVE;
+        }
+        return;
+    }
     m_pGameInput->onKeyPressed(key);
 }
 
@@ -160,6 +242,11 @@ void Game::onKeyReleased(sf::Keyboard::Key key)
 Player* Game::getPlayer() const 
 {
     return m_pPlayer.get();
+}
+
+Base* Game::getBase() const
+{
+    return m_pBase.get();
 }
 
 void Game::vampireSpawner(float deltaTime)
@@ -190,7 +277,7 @@ void Game::vampireSpawner(float deltaTime)
     m_spawnCount++;
     if (m_spawnCount % 5 == 0)
     {
-        if (m_nextVampireCooldown > 0.15f)
+        if (m_nextVampireCooldown > 0.2f)
             m_nextVampireCooldown -= 0.1f;
     }
     m_vampireCooldown = m_nextVampireCooldown;

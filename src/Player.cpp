@@ -22,7 +22,7 @@ bool Player::initialise()
     setIsDead(false);
     setPosition(ScreenWidth / 2, ScreenHeight / 2);
     m_sprite.setPosition(getPosition());
-    //Clear weapon's bullets
+    //TODO Clear weapon's bullets
     return true;
 }
 
@@ -59,6 +59,7 @@ void Player::move(InputData inputData, float deltaTime)
 
 void Player::attack()
 {
+    m_pWeapon->setPosition(getCenter());
     m_pWeapon->setActive(true);
 }
 

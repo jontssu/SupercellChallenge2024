@@ -72,10 +72,24 @@ include CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/codegen:
 .PHONY : CMakeFiles/survive.dir/codegen
 
+CMakeFiles/survive.dir/src/Base.cpp.o: CMakeFiles/survive.dir/flags.make
+CMakeFiles/survive.dir/src/Base.cpp.o: /Users/jon/survive/src/Base.cpp
+CMakeFiles/survive.dir/src/Base.cpp.o: CMakeFiles/survive.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/survive.dir/src/Base.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/survive.dir/src/Base.cpp.o -MF CMakeFiles/survive.dir/src/Base.cpp.o.d -o CMakeFiles/survive.dir/src/Base.cpp.o -c /Users/jon/survive/src/Base.cpp
+
+CMakeFiles/survive.dir/src/Base.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/survive.dir/src/Base.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jon/survive/src/Base.cpp > CMakeFiles/survive.dir/src/Base.cpp.i
+
+CMakeFiles/survive.dir/src/Base.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/survive.dir/src/Base.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jon/survive/src/Base.cpp -o CMakeFiles/survive.dir/src/Base.cpp.s
+
 CMakeFiles/survive.dir/src/Bullet.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/Bullet.cpp.o: /Users/jon/survive/src/Bullet.cpp
 CMakeFiles/survive.dir/src/Bullet.cpp.o: CMakeFiles/survive.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/survive.dir/src/Bullet.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/survive.dir/src/Bullet.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/survive.dir/src/Bullet.cpp.o -MF CMakeFiles/survive.dir/src/Bullet.cpp.o.d -o CMakeFiles/survive.dir/src/Bullet.cpp.o -c /Users/jon/survive/src/Bullet.cpp
 
 CMakeFiles/survive.dir/src/Bullet.cpp.i: cmake_force
@@ -89,7 +103,7 @@ CMakeFiles/survive.dir/src/Bullet.cpp.s: cmake_force
 CMakeFiles/survive.dir/src/Game.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/Game.cpp.o: /Users/jon/survive/src/Game.cpp
 CMakeFiles/survive.dir/src/Game.cpp.o: CMakeFiles/survive.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/survive.dir/src/Game.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/survive.dir/src/Game.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/survive.dir/src/Game.cpp.o -MF CMakeFiles/survive.dir/src/Game.cpp.o.d -o CMakeFiles/survive.dir/src/Game.cpp.o -c /Users/jon/survive/src/Game.cpp
 
 CMakeFiles/survive.dir/src/Game.cpp.i: cmake_force
@@ -103,7 +117,7 @@ CMakeFiles/survive.dir/src/Game.cpp.s: cmake_force
 CMakeFiles/survive.dir/src/InputHandler.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/InputHandler.cpp.o: /Users/jon/survive/src/InputHandler.cpp
 CMakeFiles/survive.dir/src/InputHandler.cpp.o: CMakeFiles/survive.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/survive.dir/src/InputHandler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/survive.dir/src/InputHandler.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/survive.dir/src/InputHandler.cpp.o -MF CMakeFiles/survive.dir/src/InputHandler.cpp.o.d -o CMakeFiles/survive.dir/src/InputHandler.cpp.o -c /Users/jon/survive/src/InputHandler.cpp
 
 CMakeFiles/survive.dir/src/InputHandler.cpp.i: cmake_force
@@ -117,7 +131,7 @@ CMakeFiles/survive.dir/src/InputHandler.cpp.s: cmake_force
 CMakeFiles/survive.dir/src/Main.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/Main.cpp.o: /Users/jon/survive/src/Main.cpp
 CMakeFiles/survive.dir/src/Main.cpp.o: CMakeFiles/survive.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/survive.dir/src/Main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/survive.dir/src/Main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/survive.dir/src/Main.cpp.o -MF CMakeFiles/survive.dir/src/Main.cpp.o.d -o CMakeFiles/survive.dir/src/Main.cpp.o -c /Users/jon/survive/src/Main.cpp
 
 CMakeFiles/survive.dir/src/Main.cpp.i: cmake_force
@@ -131,7 +145,7 @@ CMakeFiles/survive.dir/src/Main.cpp.s: cmake_force
 CMakeFiles/survive.dir/src/Player.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/Player.cpp.o: /Users/jon/survive/src/Player.cpp
 CMakeFiles/survive.dir/src/Player.cpp.o: CMakeFiles/survive.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/survive.dir/src/Player.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/survive.dir/src/Player.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/survive.dir/src/Player.cpp.o -MF CMakeFiles/survive.dir/src/Player.cpp.o.d -o CMakeFiles/survive.dir/src/Player.cpp.o -c /Users/jon/survive/src/Player.cpp
 
 CMakeFiles/survive.dir/src/Player.cpp.i: cmake_force
@@ -145,7 +159,7 @@ CMakeFiles/survive.dir/src/Player.cpp.s: cmake_force
 CMakeFiles/survive.dir/src/Rectangle.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/Rectangle.cpp.o: /Users/jon/survive/src/Rectangle.cpp
 CMakeFiles/survive.dir/src/Rectangle.cpp.o: CMakeFiles/survive.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/survive.dir/src/Rectangle.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/survive.dir/src/Rectangle.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/survive.dir/src/Rectangle.cpp.o -MF CMakeFiles/survive.dir/src/Rectangle.cpp.o.d -o CMakeFiles/survive.dir/src/Rectangle.cpp.o -c /Users/jon/survive/src/Rectangle.cpp
 
 CMakeFiles/survive.dir/src/Rectangle.cpp.i: cmake_force
@@ -159,7 +173,7 @@ CMakeFiles/survive.dir/src/Rectangle.cpp.s: cmake_force
 CMakeFiles/survive.dir/src/ResourceManager.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/ResourceManager.cpp.o: /Users/jon/survive/src/ResourceManager.cpp
 CMakeFiles/survive.dir/src/ResourceManager.cpp.o: CMakeFiles/survive.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/survive.dir/src/ResourceManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/survive.dir/src/ResourceManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/survive.dir/src/ResourceManager.cpp.o -MF CMakeFiles/survive.dir/src/ResourceManager.cpp.o.d -o CMakeFiles/survive.dir/src/ResourceManager.cpp.o -c /Users/jon/survive/src/ResourceManager.cpp
 
 CMakeFiles/survive.dir/src/ResourceManager.cpp.i: cmake_force
@@ -173,7 +187,7 @@ CMakeFiles/survive.dir/src/ResourceManager.cpp.s: cmake_force
 CMakeFiles/survive.dir/src/Vampire.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/Vampire.cpp.o: /Users/jon/survive/src/Vampire.cpp
 CMakeFiles/survive.dir/src/Vampire.cpp.o: CMakeFiles/survive.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/survive.dir/src/Vampire.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/survive.dir/src/Vampire.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/survive.dir/src/Vampire.cpp.o -MF CMakeFiles/survive.dir/src/Vampire.cpp.o.d -o CMakeFiles/survive.dir/src/Vampire.cpp.o -c /Users/jon/survive/src/Vampire.cpp
 
 CMakeFiles/survive.dir/src/Vampire.cpp.i: cmake_force
@@ -187,7 +201,7 @@ CMakeFiles/survive.dir/src/Vampire.cpp.s: cmake_force
 CMakeFiles/survive.dir/src/Weapon.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/Weapon.cpp.o: /Users/jon/survive/src/Weapon.cpp
 CMakeFiles/survive.dir/src/Weapon.cpp.o: CMakeFiles/survive.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/survive.dir/src/Weapon.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/survive.dir/src/Weapon.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/survive.dir/src/Weapon.cpp.o -MF CMakeFiles/survive.dir/src/Weapon.cpp.o.d -o CMakeFiles/survive.dir/src/Weapon.cpp.o -c /Users/jon/survive/src/Weapon.cpp
 
 CMakeFiles/survive.dir/src/Weapon.cpp.i: cmake_force
@@ -200,6 +214,7 @@ CMakeFiles/survive.dir/src/Weapon.cpp.s: cmake_force
 
 # Object files for target survive
 survive_OBJECTS = \
+"CMakeFiles/survive.dir/src/Base.cpp.o" \
 "CMakeFiles/survive.dir/src/Bullet.cpp.o" \
 "CMakeFiles/survive.dir/src/Game.cpp.o" \
 "CMakeFiles/survive.dir/src/InputHandler.cpp.o" \
@@ -213,6 +228,7 @@ survive_OBJECTS = \
 # External object files for target survive
 survive_EXTERNAL_OBJECTS =
 
+bin/survive: CMakeFiles/survive.dir/src/Base.cpp.o
 bin/survive: CMakeFiles/survive.dir/src/Bullet.cpp.o
 bin/survive: CMakeFiles/survive.dir/src/Game.cpp.o
 bin/survive: CMakeFiles/survive.dir/src/InputHandler.cpp.o
@@ -230,7 +246,7 @@ bin/survive: _deps/sfml-build/lib/libsfml-window.a
 bin/survive: _deps/sfml-src/extlibs/libs-osx/Frameworks/OpenAL.framework/OpenAL
 bin/survive: _deps/sfml-build/lib/libsfml-system.a
 bin/survive: CMakeFiles/survive.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable bin/survive"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jon/survive/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable bin/survive"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/survive.dir/link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Copy assets directory"
 	/opt/homebrew/bin/cmake -E copy_directory /Users/jon/survive/assets /Users/jon/survive/build/bin/assets

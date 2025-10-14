@@ -1,6 +1,5 @@
-CMakeFiles/survive.dir/src/Vampire.cpp.o: \
-  /Users/jon/survive/src/Vampire.cpp /Users/jon/survive/src/Vampire.h \
-  /Users/jon/survive/src/Rectangle.h \
+CMakeFiles/survive.dir/src/Base.cpp.o: /Users/jon/survive/src/Base.cpp \
+  /Users/jon/survive/src/Base.h /Users/jon/survive/src/Rectangle.h \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/Drawable.hpp \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/Export.hpp \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Config.hpp \
@@ -810,6 +809,5 @@ CMakeFiles/survive.dir/src/Vampire.cpp.o: \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/Text.hpp \
   /Users/jon/survive/build/_deps/sfml-src/include/SFML/Graphics/VertexBuffer.hpp \
   /Users/jon/survive/src/Constants.h /Users/jon/survive/src/Game.h \
-  /Users/jon/survive/src/Weapon.h /Users/jon/survive/src/Bullet.h \
-  /Users/jon/survive/src/Player.h /Users/jon/survive/src/MathUtils.h \
-  /Users/jon/survive/src/Base.h
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/istream

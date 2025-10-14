@@ -25,7 +25,7 @@ private:
     float m_timer = 0.0f;
 
     float m_bulletCooldown = 0.0f;
-    float m_nextBulletCooldown = 0.2f;
+    float m_nextBulletCooldown = StartBulletCooldown;
 
     Game* m_pGame;
     std::vector<std::unique_ptr<Bullet>> m_pBullets;

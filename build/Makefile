@@ -259,6 +259,30 @@ sfml-audio/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build.make _deps/sfml-build/src/SFML/Audio/CMakeFiles/sfml-audio.dir/build
 .PHONY : sfml-audio/fast
 
+src/Base.o: src/Base.cpp.o
+.PHONY : src/Base.o
+
+# target to build an object file
+src/Base.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/Base.cpp.o
+.PHONY : src/Base.cpp.o
+
+src/Base.i: src/Base.cpp.i
+.PHONY : src/Base.i
+
+# target to preprocess a source file
+src/Base.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/Base.cpp.i
+.PHONY : src/Base.cpp.i
+
+src/Base.s: src/Base.cpp.s
+.PHONY : src/Base.s
+
+# target to generate assembly for a file
+src/Base.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/Base.cpp.s
+.PHONY : src/Base.cpp.s
+
 src/Bullet.o: src/Bullet.cpp.o
 .PHONY : src/Bullet.o
 
@@ -495,6 +519,9 @@ help:
 	@echo "... sfml-system"
 	@echo "... sfml-window"
 	@echo "... survive"
+	@echo "... src/Base.o"
+	@echo "... src/Base.i"
+	@echo "... src/Base.s"
 	@echo "... src/Bullet.o"
 	@echo "... src/Bullet.i"
 	@echo "... src/Bullet.s"

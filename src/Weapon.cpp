@@ -1,9 +1,12 @@
 #include "Weapon.h"
 #include "Constants.h"
 #include "Player.h"
+#include "Vampire.h"
+#include <iostream>
 
-Weapon::Weapon(Game* pGame) : Rectangle(sf::Vector2f(0, 0)) 
+Weapon::Weapon(Game* pGame) : Rectangle(sf::Vector2f(0, 0)), m_pGame(pGame)
 {
+    // std::cout << "Weapon constructed, m_pGame: " << m_pGame << std::endl;
     setPosition(sf::Vector2f(ScreenWidth * 0.5f, ScreenHeight * 0.5f));
     setOrigin(sf::Vector2f(0.0f, 0.0f));
     setColor(sf::Color::Blue);
@@ -66,13 +69,34 @@ void Weapon::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 void Weapon::bulletSpawner(float deltaTime) 
 {
-    if (m_bulletCooldown > 0.0f)
+    if (m_bulletCooldown > 1.0f)
     {
         m_bulletCooldown -= deltaTime;
         return;
     }
 
-    sf::Vector2f bulletDir(0.f, -1.f); // shoot upward
-    m_pBullets.push_back(std::make_unique<Bullet>(getPosition(), bulletDir));
-    m_bulletCooldown = m_nextBulletCooldown;
+    sf::Vector2f weaponPos = getPosition();
+    float minDistSq = std::numeric_limits<float>::max();
+    Vampire* closestVamp = nullptr;
+    if (m_pGame) {
+        for (const auto& vampPtr : m_pGame->getVampires()) {
+            if (vampPtr->isKilled()) continue;
+            sf::Vector2f vampPos = vampPtr->getCenter();
+            float distSq = (vampPos.x - weaponPos.x) * (vampPos.x - weaponPos.x) + (vampPos.y - weaponPos.y) * (vampPos.y - weaponPos.y);
+            if (distSq < minDistSq) {
+                minDistSq = distSq;
+                closestVamp = vampPtr.get();
+            }
+        }
+        if (closestVamp) {
+            sf::Vector2f vampPos = closestVamp->getCenter();
+            sf::Vector2f dir = vampPos - weaponPos;
+            float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+            sf::Vector2f bulletDir(0.f, -1.f); // default upward
+            if (len > 0.01f)
+                bulletDir = dir / len;
+            m_pBullets.push_back(std::make_unique<Bullet>(weaponPos, bulletDir));
+            m_bulletCooldown = m_nextBulletCooldown;
+        }
+    }
 }
