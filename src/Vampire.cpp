@@ -60,8 +60,14 @@ void Vampire::update(float deltaTime)
         }
     }
 
-    if (collidesWith(pPlayer))
-        pPlayer->setIsDead(true);
+    if (collidesWith(pPlayer)) {
+        if (m_vampireAttackCooldown <= 0.0f) {
+            pPlayer->takeDamage(m_vampireDamage);
+            m_vampireAttackCooldown = 1.0f; // Attack cooldown of 1 second
+        } else {
+            m_vampireAttackCooldown -= deltaTime;
+        }   
+    }
     if (collidesWith(pBase)) {
         if (m_vampireAttackCooldown <= 0.0f) {
             if (pBase->takeDamage(m_vampireDamage))

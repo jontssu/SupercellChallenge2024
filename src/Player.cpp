@@ -22,7 +22,7 @@ bool Player::initialise()
     setIsDead(false);
     setPosition(ScreenWidth / 2, ScreenHeight / 2);
     m_sprite.setPosition(getPosition());
-    //TODO Clear weapon's bullets
+    m_pWeapon->clearBullets();
     return true;
 }
 
@@ -60,6 +60,17 @@ void Player::attack()
 {
     // m_pWeapon->setPosition(getCenter());
     // m_pWeapon->setActive(true);
+}
+
+void Player::takeDamage(float damage)
+{
+    if (PlayerImmunity)
+        return;
+
+    m_currentHealth -= damage;
+
+    if (m_currentHealth <= 0.0f)
+        m_isDead = true;
 }
 
 void Player::update(float deltaTime)

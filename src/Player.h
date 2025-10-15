@@ -34,6 +34,8 @@ public:
     float getMaxHealth() const { return m_maxHealth; }
     float getCurrentHealth() const { return m_currentHealth; }
 
+    void takeDamage(float damage);
+
     void increaseDamage(float amount) { m_pWeapon->setBulletDamage(amount); }
 
     void increaseSpeed(float amount) { m_playerSpeed += amount; }

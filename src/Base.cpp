@@ -19,9 +19,11 @@ bool Base::initialise()
 {
 	m_sprite.setTexture(*m_pGame->getBaseTexture());
 	m_sprite.setScale(3.0f, 3.0f);
+
+	m_pWeapon->clearBullets();
 	m_maxHealth = BaseStartingHealth;
 	m_isDestroyed = false;
-	// Set weapon stats for base
+
 	m_pWeapon->setFireRate(BaseFireRate);
 	m_pWeapon->setBulletDamage(BaseDamage);
 	m_pWeapon->setBulletPierce(BasePierceCount);

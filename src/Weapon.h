@@ -27,6 +27,7 @@ public:
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void bulletSpawner(float deltaTime);
+    void clearBullets() { m_pBullets.clear(); }
 
     const std::vector<std::unique_ptr<Bullet>>& getBullets() const { return m_pBullets; }
 

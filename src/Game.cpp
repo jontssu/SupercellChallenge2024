@@ -71,7 +71,7 @@ bool Game::initialise()
 void Game::resetLevel()
 {
     m_pVampires.clear();
-    m_nextVampireCooldown = StartNextVampireCooldown;
+    m_nextVampireCooldown = VampireSpawnCooldown;
 
     m_pBase->initialise();
     m_pPlayer->initialise();
