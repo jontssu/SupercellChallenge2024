@@ -16,7 +16,7 @@ Vampire::Vampire(Game* game, sf::Vector2f position) :
     setIsKilled(false);
 
     m_sprite.setTexture(*m_pGame->getVampireTexture());
-    m_sprite.setScale(2.0f, 2.0f);
+    m_sprite.setScale(VampireScale);
 }
 
 void Vampire::update(float deltaTime)

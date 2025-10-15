@@ -2,11 +2,13 @@
 
 const int ScreenWidth = 1200;
 const int ScreenHeight = 800;
+const float GlobalScale = 1.0f;
 
 const float PlayerHeight = 55.0f;
 const float PlayerWidth = 55.0f;
 const float PlayerSpeed = 200.0f;
 const float PlayerMaxHealth = 100.0f;
+const sf::Vector2f PlayerScale = sf::Vector2f(3.5f * GlobalScale, 3.5f * GlobalScale);
 
 const float VampireHeight = 32.0f;
 const float VampireWidth = 32.0f;
@@ -14,7 +16,8 @@ const float VampireBaseHealth = 10.0f;
 const float VampireSpeed = 50.0f;
 const float VampireBaseDamage = 1.0f;
 const float VampireBaseReward = 5.0f;
-const float StartNextVampireCooldown = 2.0f;
+const float VampireSpawnCooldown = 2.0f;
+const sf::Vector2f VampireScale = sf::Vector2f(2.0f * GlobalScale, 2.0f * GlobalScale);
 
 const float WeaponHeight = 10.0f;
 const float WeaponWidth = 100.0f;
@@ -36,10 +39,10 @@ const float BasePierceCount = 1.0f;
 const sf::Vector2f ShopBgSize = sf::Vector2f(450.0f, 350.0f);
 
 const float GameStartWaitingTime = 1.0f;
-const bool PlayerImmunity = true;
-const bool BaseImmunity = true;
+const bool PlayerImmunity = false;
+const bool BaseImmunity = false;
 const bool DisableWeapons = false;
 const bool DisableLaser = true;
 const bool DisableGun = false;
-const bool InfiniteMoney = true;
+const bool InfiniteMoney = false;
 const bool InfiniteEnemies = false;

@@ -18,7 +18,7 @@ Player::Player(Game* pGame) :
 bool Player::initialise()
 {
     m_sprite.setTexture(*m_pGame->getPlayerTexture());
-    m_sprite.setScale(3.5f, 3.5f);
+    m_sprite.setScale(PlayerScale);
     setIsDead(false);
     setPosition(ScreenWidth / 2, ScreenHeight / 2);
     m_sprite.setPosition(getPosition());

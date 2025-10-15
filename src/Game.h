@@ -78,7 +78,7 @@ private:
     std::unique_ptr<GameInput> m_pGameInput;
 
     float m_vampireCooldown = 0.0f;
-    float m_nextVampireCooldown = InfiniteEnemies == true ? -1.0f : StartNextVampireCooldown;
+    float m_nextVampireCooldown = InfiniteEnemies == true ? -1.0f : VampireSpawnCooldown;
     int m_spawnCount = 0;
     
     sf::Font m_font;
