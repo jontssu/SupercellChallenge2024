@@ -10,6 +10,7 @@ const float PlayerMaxHealth = 100.0f;
 
 const float VampireHeight = 32.0f;
 const float VampireWidth = 32.0f;
+const float VampireBaseHealth = 10.0f;
 const float VampireSpeed = 50.0f;
 const float VampireBaseDamage = 1.0f;
 const float VampireBaseReward = 5.0f;
@@ -19,7 +20,7 @@ const float WeaponHeight = 10.0f;
 const float WeaponWidth = 100.0f;
 const float WeaponActiveTime = 0.05f;
 const int	WeaponPierceCount = 1;
-const float WeaponBulletDamage = 100.0f;
+const float WeaponBulletDamage = 5.0f;
 const float WeaponProjectileSpeed = 300.0f;
 const float WeaponLaserActiveTime = 1.0f;
 const float WeaponLaserCoolDown = 5.0f;
@@ -28,7 +29,7 @@ const float WeaponFireRate = 2.5f;
 const float BaseHeight = 50.0f;
 const float BaseWidth = 50.0f;	
 const float BaseStartingHealth = 100.0f;
-const float BaseDamage = 100.0f;
+const float BaseDamage = 10.0f;
 const float BaseFireRate = 5.0f;
 const float BasePierceCount = 1.0f;
 

@@ -23,8 +23,8 @@ bool Base::initialise()
 	m_isDestroyed = false;
 	// Set weapon stats for base
 	m_pWeapon->setFireRate(BaseFireRate);
-	m_pWeapon->increaseDamage(BaseDamage - WeaponBulletDamage); // Adjust to base damage
-	m_pWeapon->increasePiercing((int)BasePierceCount - WeaponPierceCount); // Adjust to base pierce
+	m_pWeapon->setBulletDamage(BaseDamage);
+	m_pWeapon->setBulletPierce(BasePierceCount);
 	return true;
 }   
 

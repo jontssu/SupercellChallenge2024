@@ -16,13 +16,17 @@ public:
     void setIsKilled(bool isKilled) { m_isKilled = isKilled; }
     bool isKilled() { return m_isKilled; }
 
-    float getDifficultyScaling() const { return difficultyScaling; }
-    void setDifficultyScaling(float scale) { difficultyScaling *= scale; }
+    float getDifficultyScaling() const { return m_difficultyScaling; }
+    void setDifficultyScaling(float scale) { m_difficultyScaling *= scale; }
 
 private:
-    float vampireDamage = VampireBaseDamage;
-    float vampireAttackCooldown = 0.0f;
-    float difficultyScaling = 1.0f;
-    Game* m_pGame;
+    float m_vampireHp = VampireBaseHealth;
+    float m_vampireDamage = VampireBaseDamage;
+    float m_vampireSpeed = VampireSpeed;
+    float m_vampireAttackCooldown = 0.0f;
+    float m_difficultyScaling = 1.0f;
+
     bool m_isKilled = false;
+
+    Game* m_pGame;
 };

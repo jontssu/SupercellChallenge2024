@@ -87,7 +87,7 @@ void Weapon::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 void Weapon::bulletSpawner(float deltaTime) 
 {
-    if (m_bulletCooldown > 1.0f)
+    if (m_bulletCooldown > 0.0f)
     {
         m_bulletCooldown -= deltaTime;
         return;
@@ -113,7 +113,7 @@ void Weapon::bulletSpawner(float deltaTime)
             sf::Vector2f bulletDir(0.f, -1.f); // default upward
             if (len > 0.01f)
                 bulletDir = dir / len;
-            m_pBullets.push_back(std::make_unique<Bullet>(weaponPos, bulletDir, m_bulletSpeed, m_piercing, 2.0f));
+            m_pBullets.push_back(std::make_unique<Bullet>(weaponPos, bulletDir, m_bulletSpeed, m_piercing, m_bulletDamage, 2.0f));
             m_bulletCooldown = m_nextBulletCooldown;
         }
     }

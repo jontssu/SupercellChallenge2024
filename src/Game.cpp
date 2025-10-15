@@ -293,12 +293,12 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
             statText.setString("Player\n\nMax HP: " + std::to_string(static_cast<int>(m_pPlayer->getMaxHealth())) +
                 "\nDamage: " + std::to_string(static_cast<int>(m_pPlayer->getWeapon()->getBulletDamage())) +
                 "\nFire Rate: " + fireRateStr + "/s" +
-                "\nPiercing: " + std::to_string(static_cast<int>(m_pPlayer->getWeapon()->getPierceCount())) +
+                "\nPiercing: " + std::to_string(static_cast<int>(m_pPlayer->getWeapon()->getBulletPierce())) +
                 "\nSpeed: " + std::to_string(static_cast<int>(m_pPlayer->getSpeed())) +
                 "\n\nBase\n\nMax HP: " + std::to_string(static_cast<int>(m_pBase->getMaxHealth())) +
                 "\nDamage: " + std::to_string(static_cast<int>(m_pBase->getWeapon()->getBulletDamage())) +
                 "\nFire Rate: " + baseFireRateStr + "/s" +
-                "\nPiercing: " + std::to_string(static_cast<int>(m_pBase->getWeapon()->getPierceCount())));
+                "\nPiercing: " + std::to_string(static_cast<int>(m_pBase->getWeapon()->getBulletPierce())));
             target.draw(statText);
         }
     }
@@ -455,7 +455,7 @@ void Game::onMousePressed(sf::Vector2i mousePos)
                                 {
                                     std::cout << "Upgrading Damage" << std::endl;
                                     m_playerMoney -= m_upgradeDamageCost;
-                                    m_pPlayer->increaseDamage(50);
+                                    m_pPlayer->increaseDamage(5);
                                     m_upgradeDamageCost += 25;
                                 }
                                 break;
@@ -477,7 +477,7 @@ void Game::onMousePressed(sf::Vector2i mousePos)
                                 {
                                     std::cout << "Upgrading Piercing" << std::endl;
                                     m_playerMoney -= m_upgradePiercingCost;
-                                    m_pPlayer->getWeapon()->increasePiercing(1);
+                                    m_pPlayer->getWeapon()->setBulletPierce(1); // Increases by one
                                     m_upgradePiercingCost += 100;
                                 }
                                 break;
@@ -513,7 +513,7 @@ void Game::onMousePressed(sf::Vector2i mousePos)
                                 {
                                     std::cout << "Upgrading Base Damage" << std::endl;
                                     m_playerMoney -= m_upgradeBaseDamageCost;
-                                    m_pBase->increaseDamage(50);
+                                    m_pBase->getWeapon()->setBulletDamage(5); // Increases by five
                                     m_upgradeBaseDamageCost += 25;
                                 }
                                 break;
@@ -535,7 +535,7 @@ void Game::onMousePressed(sf::Vector2i mousePos)
                                 {
                                     std::cout << "Upgrading Base Piercing" << std::endl;
                                     m_playerMoney -= m_upgradeBasePiercingCost;
-                                    m_pBase->getWeapon()->increasePiercing(1);
+                                    m_pBase->getWeapon()->setBulletPierce(1); // Increases by one
                                     m_upgradeBasePiercingCost += 100;
                                 }
                                 break;
