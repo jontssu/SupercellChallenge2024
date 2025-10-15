@@ -15,8 +15,8 @@ const float VampireWidth = 32.0f;
 const float VampireBaseHealth = 10.0f;
 const float VampireSpeed = 50.0f;
 const float VampireBaseDamage = 1.0f;
-const float VampireBaseReward = 5.0f;
-const float VampireSpawnCooldown = 2.0f;
+const float VampireBaseReward = 10.0f;
+const float VampireSpawnCooldown = 3.5f;
 const sf::Vector2f VampireScale = sf::Vector2f(2.0f * GlobalScale, 2.0f * GlobalScale);
 
 const float WeaponHeight = 10.0f;

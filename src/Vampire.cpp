@@ -37,7 +37,9 @@ void Vampire::update(float deltaTime)
     for (const auto& bullet : pPlayer->getWeapon()->getBullets()) {
         if (collidesWith(bullet.get())) {
             if (bullet->getPierceCount() > 0) {
-                setIsKilled(true);
+                m_vampireHp -= bullet->getDamage();
+                if (m_vampireHp <= 0.0f)
+                    setIsKilled(true);
                 bullet->setPierceCount(bullet->getPierceCount() - 1);
             }
             if (bullet->getPierceCount() <= 0) {
@@ -50,7 +52,9 @@ void Vampire::update(float deltaTime)
     for (const auto& bullet : pBase->getWeapon()->getBullets()) {
         if (collidesWith(bullet.get())) {
             if (bullet->getPierceCount() > 0) {
-                setIsKilled(true);
+                m_vampireHp -= bullet->getDamage();
+                if (m_vampireHp <= 0.0f)
+                    setIsKilled(true);
                 bullet->setPierceCount(bullet->getPierceCount() - 1);
             }
             if (bullet->getPierceCount() <= 0) {
