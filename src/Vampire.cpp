@@ -33,8 +33,21 @@ void Vampire::update(float deltaTime)
         return;
     }
 
-    // Check collision with bullets
+    // Check collision with player bullets
     for (const auto& bullet : pPlayer->getWeapon()->getBullets()) {
+        if (collidesWith(bullet.get())) {
+            if (bullet->getPierceCount() > 0) {
+                setIsKilled(true);
+                bullet->setPierceCount(bullet->getPierceCount() - 1);
+            }
+            if (bullet->getPierceCount() <= 0) {
+                bullet->setDead(true);
+            }
+            break;
+        }
+    }
+    // Check collision with base bullets
+    for (const auto& bullet : pBase->getWeapon()->getBullets()) {
         if (collidesWith(bullet.get())) {
             if (bullet->getPierceCount() > 0) {
                 setIsKilled(true);
